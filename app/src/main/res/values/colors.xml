@@ -10,4 +10,5 @@
     <color name="main_color">#4E5180</color>
     <color name="background_assets">#F3F3F3</color>
     <color name="yellow">#FFE000</color>
+    <color name="red">#FF0000</color>
 </resources>

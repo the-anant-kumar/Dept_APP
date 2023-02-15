@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFragment">
 
@@ -18,24 +19,20 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:text="Welcome to Department of Information Technology !!"
-        android:textColor="@color/main_color"
+        android:textColor="@color/purple_500"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/marqueeText">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/imageSlider"
@@ -53,7 +50,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent" />
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -118,7 +114,6 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
                         android:gravity="center"
                         android:text="Events"
                         android:textAlignment="center"
@@ -133,7 +128,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
                         android:gravity="center"
-                        android:text="view more posts"
+                        android:text="view more"
                         android:textColor="@color/black"
                         android:textSize="10sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -157,18 +152,25 @@
                             android:id="@+id/img_event1"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/four" />
+                            android:layout_weight="0.7"
+                            android:scaleType="centerCrop" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date: February 10, 2023"
+                            android:textSize="10sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="0.5"
+                            android:layout_weight="0.3"
                             android:ellipsize="end"
-                            android:maxLines="4"
+                            android:gravity="center_vertical"
+                            android:maxLines="3"
                             android:padding="3dp"
-                            android:text="kbvkdvevugvgergkbvkdvevkbvkdvevugvgergkbvkdvevugvgergkbvkdvevugvgergugvgergkbvkdvevugvgergkbvkdvevugvgergkbvkdvevugvgergkbvkdvevugvgerg,jgb" />
+                            android:text="This is the event that arrange for mainly for improving skills. Staff Development Programme by Mechanical Engineering Department "
+                            android:textColor="@color/purple_500" />
 
                     </LinearLayout>
 
@@ -191,15 +193,17 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.6"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/four" />
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:maxLines="3"
                                 android:padding="3dp"
                                 android:text="Chandan singha"
+                                android:textColor="@color/purple_500"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -216,15 +220,16 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.6"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/four" />
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:gravity="center_vertical"
                                 android:padding="3dp"
                                 android:text="Chandan singha"
+                                android:textColor="@color/purple_500"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -241,15 +246,16 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.6"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/four" />
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:gravity="center_vertical"
                                 android:padding="3dp"
                                 android:text="Chandan singha"
+                                android:textColor="@color/purple_500"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -266,15 +272,16 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.6"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/four" />
+                                android:scaleType="centerCrop" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:gravity="center_vertical"
                                 android:padding="3dp"
                                 android:text="Chandan singha"
+                                android:textColor="@color/purple_500"
                                 android:textSize="10sp" />
                         </LinearLayout>
 
@@ -285,11 +292,55 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:background="@color/background_assets"
-                >
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/under_line">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Noticed"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:text="view more"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/noticed_board"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/background_assets"
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -300,11 +351,11 @@
                     android:textStyle="bold" />
 
                 <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_video"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/youtube_video"
-                    app:videoId="5GKkJUxT1gE"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    app:videoId="5GKkJUxT1gE" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -432,8 +483,9 @@ Haldia, Dist-Purba Medinipore, WB, Pin-721657
                     android:text="LinkedIn"
                     android:textColor="@color/yellow"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/linkedin" />            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintStart_toEndOf="@+id/linkedin" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -2,9 +2,13 @@ package com.example.deptapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.deptapp.Fragments.*
 import com.example.deptapp.databinding.ActivityMainBinding
 
@@ -24,6 +28,9 @@ class MainActivity : AppCompatActivity() {
             R.string.open_drawer,
             R.string.close_drawer
         )
+
+
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         binding.drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 
@@ -31,8 +38,9 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.admin -> {
+                    binding.appBarLayout.visibility=View.GONE
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame, AdminFragment())
+                        .replace(R.id.frame, LogInFragment())
                         .commit()
                     binding.drawerLayout.closeDrawers()
                 }
@@ -72,19 +80,28 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     binding.drawerLayout.closeDrawers()
                 }
+                R.id.about -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frame, AboutFragment())
+                        .commit()
+                    binding.drawerLayout.closeDrawers()
+                }
             }
             return@setNavigationItemSelectedListener true
         }
     }
 
     override fun onBackPressed() {
-        val frag = supportFragmentManager.findFragmentById(R.id.frame)
-        when (frag) {
-            !is HomeFragment -> {
-                openDashboard()
-                binding.navigationView.checkedItem?.isChecked = false
+        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+            binding.drawerLayout.closeDrawers()
+        }else{
+            when (supportFragmentManager.findFragmentById(R.id.frame)) {
+                !is HomeFragment -> {
+                    openDashboard()
+                    binding.navigationView.checkedItem?.isChecked = false
+                }
+                else -> super.onBackPressed()
             }
-            else -> super.onBackPressed()
         }
     }
 
@@ -94,7 +111,8 @@ class MainActivity : AppCompatActivity() {
         val transaction=supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frame,fragment)
         transaction.commit()
-
+        if(!binding.appBarLayout.isVisible)
+            binding.appBarLayout.visibility=View.VISIBLE
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
