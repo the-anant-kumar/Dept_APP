@@ -28,16 +28,16 @@ class HomeFragment : Fragment() {
     lateinit var imageList: ArrayList<SlideModel>
     lateinit var noticeBoardAdapter: NoticeBoardAdapter
     var itemLists = arrayListOf(
-        "Notice1",
-        "Notice2",
-        "Notice3",
-        "Notice4",
-        "Notice5",
-        "Notice6",
-        "Notice7",
-        "Notice8",
-        "Notice9",
-        "Notice10"
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting"
     )
 
 

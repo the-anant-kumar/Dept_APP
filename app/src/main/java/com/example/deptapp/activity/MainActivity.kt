@@ -2,6 +2,7 @@ package com.example.deptapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -38,9 +39,9 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.admin -> {
-                    binding.appBarLayout.visibility=View.GONE
+//                    binding.appBarLayout.visibility=View.GONE
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame, LogInFragment())
+                        .replace(R.id.frame, AdminFragment())
                         .commit()
                     binding.drawerLayout.closeDrawers()
                 }
@@ -116,7 +117,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         val id = item.itemId
         if (id == android.R.id.home) {
             binding.drawerLayout.openDrawer(GravityCompat.START)
@@ -129,5 +129,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = ""
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return true
     }
 }

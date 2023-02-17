@@ -13,7 +13,6 @@ import com.example.deptapp.R
 class NoticeBoardAdapter (val context: Context, private val itemsList: ArrayList<String>):  RecyclerView.Adapter<NoticeBoardAdapter.NoticeBoardViewHolder>(){
 
     class NoticeBoardViewHolder(view: View):RecyclerView.ViewHolder(view){
-        val noticeImg: ImageView =view.findViewById(R.id.noticeImg)
         val noticeTitle: TextView =view.findViewById(R.id.noticeTitle)
         val noticeDate: TextView =view.findViewById(R.id.noticeDate)
     }
@@ -24,7 +23,6 @@ class NoticeBoardAdapter (val context: Context, private val itemsList: ArrayList
     }
 
     override fun onBindViewHolder(holder: NoticeBoardViewHolder, position: Int) {
-        Glide.with(context).load(R.drawable.img).into(holder.noticeImg)
         holder.noticeTitle.text=itemsList[position]
     }
 
