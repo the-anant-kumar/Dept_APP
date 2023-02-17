@@ -22,24 +22,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.cardview.widget.CardView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTeacher"
         android:layout_width="match_parent"
-        android:layout_height="690dp"
-        app:cardCornerRadius="10dp"
-        android:elevation="10dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        tools:listitem="@layout/item_teacher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTeacher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            tools:listitem="@layout/item_teacher" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@+id/tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
