@@ -1,15 +1,15 @@
-package com.example.deptapp
+package com.example.deptapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.deptapp.Fragments.*
+import com.example.deptapp.fragments.*
+import com.example.deptapp.R
 import com.example.deptapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
