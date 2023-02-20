@@ -14,17 +14,18 @@ class FacultyFragment : Fragment() {
 
     lateinit var binding: FragmentFacultyBinding
     lateinit var teachersListAdapter: TeachersListAdapter
+
     var itemLists = arrayListOf(
-        "Soumen Paul",
-        "MB",
-        "Tamosa Chokroborty",
-        "Banani Ghosh",
-        "Debolina Ghosh",
-        "Bidyut Das",
-        "Pijush Bairi",
-        "Arundhati Bhowal",
-        "Moumita Ghosh",
-        "Anushree Pramanik"
+        Triple("Soumen Paul", "Head of Department", "spaul234@gmail.com"),
+        Triple("Manasija Bhattacharya", "Asst. Professor", "mb332@gmail.com"),
+        Triple("Tamosa Chakraborty", "Asst. Professor", "tamosa32it@gmail.com"),
+        Triple("Banani Ghosh", "Asst. Professor", "banani23@gmail.com"),
+        Triple("Ramkrishna Ghosh","Assoc. Professor", "ramkrishna@gmail.com"),
+        Triple("Pijush Bair","Asst. Professor", "pbairi@gmail.com"),
+        Triple("Debolina Ghosh","Asst. Professor", "dghosh@gmail.com"),
+        Triple("Arundhati Bhowal", "Asst. Professor","ab23@gmail.com"),
+        Triple("Bidyut Das ", "Assoc. Professor", "bidyut23@gmail.com"),
+        Triple("Moumita Ghosh", "Asst. Professor", "mgh@gmail.com")
     )
 
     override fun onCreateView(

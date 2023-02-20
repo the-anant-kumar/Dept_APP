@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.deptapp.R
 
-class TeachersListAdapter(private val itemsList: ArrayList<String>) : RecyclerView.Adapter<TeachersListAdapter.TeachersListViewHolder>() {
+class TeachersListAdapter(private val itemsList: ArrayList<Triple<String,String,String>>) : RecyclerView.Adapter<TeachersListAdapter.TeachersListViewHolder>() {
     class TeachersListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val teacherImg: ImageView = itemView.findViewById(R.id.ivItemTeacher)
         val teacherName: TextView = itemView.findViewById(R.id.tvNameItemTeacher)
         val teacherDesignation: TextView = itemView.findViewById(R.id.tvDesignationItemTeacher)
+        val teacherEmail: TextView = itemView.findViewById(R.id.tvEmailItemTeacher)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeachersListViewHolder {
@@ -21,8 +22,9 @@ class TeachersListAdapter(private val itemsList: ArrayList<String>) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: TeachersListViewHolder, position: Int) {
-        holder.teacherName.text = itemsList[position]
-        holder.teacherDesignation.text = itemsList[position]
+        holder.teacherName.text = itemsList[position].first
+        holder.teacherDesignation.text = itemsList[position].second
+        holder.teacherEmail.text = itemsList[position].third
     }
 
     override fun getItemCount(): Int {
