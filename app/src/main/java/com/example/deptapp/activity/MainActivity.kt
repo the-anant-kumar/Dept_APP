@@ -38,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setNavigationItemSelectedListener {
 
             when (it.itemId) {
+                R.id.home -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frame, HomeFragment())
+                        .commit()
+                    binding.drawerLayout.closeDrawers()
+                }
                 R.id.admin -> {
 //                    binding.appBarLayout.visibility=View.GONE
                     supportFragmentManager.beginTransaction()
@@ -66,6 +72,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.library -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame, LibraryFragment())
+                        .commit()
+                    binding.drawerLayout.closeDrawers()
+                }
+                R.id.placement -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frame, PlacementFragment())
                         .commit()
                     binding.drawerLayout.closeDrawers()
                 }
