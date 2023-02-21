@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.deptapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.deptapp.adapters.BooksListAdapter
+import com.example.deptapp.adapters.TeachersListAdapter
+import com.example.deptapp.databinding.FragmentLibraryBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,43 +21,35 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class LibraryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentLibraryBinding
+    private lateinit var booksListAdapter: BooksListAdapter
+
+    var itemLists = arrayListOf(
+        Triple("Soumen Paul", "Head of Department", "spaul234@gmail.com"),
+        Triple("Manasija Bhattacharya", "Asst. Professor", "mb332@gmail.com"),
+        Triple("Tamosa Chakraborty", "Asst. Professor", "tamosa32it@gmail.com"),
+        Triple("Banani Ghosh", "Asst. Professor", "banani23@gmail.com"),
+        Triple("Ramkrishna Ghosh","Assoc. Professor", "ramkrishna@gmail.com"),
+        Triple("Pijush Bair","Asst. Professor", "pbairi@gmail.com"),
+        Triple("Debolina Ghosh","Asst. Professor", "dghosh@gmail.com"),
+        Triple("Arundhati Bhowal", "Asst. Professor","ab23@gmail.com"),
+        Triple("Bidyut Das ", "Assoc. Professor", "bidyut23@gmail.com"),
+        Triple("Moumita Ghosh", "Asst. Professor", "mgh@gmail.com")
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_library, container, false)
+        binding= FragmentLibraryBinding.inflate(layoutInflater, container, false)
+        setupBookList()
+        return binding.root
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LibraryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LibraryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setupBookList() {
+        booksListAdapter = BooksListAdapter(itemLists)
+        binding.rvBooks.adapter = booksListAdapter
+        binding.rvBooks.layoutManager = LinearLayoutManager(binding.root.context)
     }
 }

@@ -60,7 +60,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:id="@+id/img_btn1"
+                    android:id="@+id/btnWebsite"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -71,18 +71,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/img_btn2"
+                    android:id="@+id/btnFaculity"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/faculty_members"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/img_btn3"
-                    app:layout_constraintStart_toEndOf="@+id/img_btn1"
+                    app:layout_constraintEnd_toStartOf="@+id/btnAcademics"
+                    app:layout_constraintStart_toEndOf="@+id/btnWebsite"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/img_btn3"
+                    android:id="@+id/btnAcademics"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"

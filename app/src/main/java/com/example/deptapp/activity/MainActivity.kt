@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             R.string.close_drawer
         )
 
-
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         binding.drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
@@ -45,9 +44,8 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawers()
                 }
                 R.id.admin -> {
-//                    binding.appBarLayout.visibility=View.GONE
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame, AdminFragment())
+                        .replace(R.id.frame, LogInFragment())
                         .commit()
                     binding.drawerLayout.closeDrawers()
                 }
@@ -111,7 +109,6 @@ class MainActivity : AppCompatActivity() {
             when (supportFragmentManager.findFragmentById(R.id.frame)) {
                 !is HomeFragment -> {
                     openDashboard()
-                    binding.navigationView.checkedItem?.isChecked = false
                 }
                 else -> super.onBackPressed()
             }
@@ -124,8 +121,7 @@ class MainActivity : AppCompatActivity() {
         val transaction=supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frame,fragment)
         transaction.commit()
-        if(!binding.appBarLayout.isVisible)
-            binding.appBarLayout.visibility=View.VISIBLE
+        binding.navigationView.setCheckedItem(R.id.home)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

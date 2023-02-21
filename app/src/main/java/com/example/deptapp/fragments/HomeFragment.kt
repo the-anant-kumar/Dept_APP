@@ -1,17 +1,21 @@
 package com.example.deptapp.fragments
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.deptapp.R
 import com.example.deptapp.adapters.NoticeBoardAdapter
 import com.example.deptapp.databinding.FragmentHomeBinding
+import com.google.android.material.navigation.NavigationView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,6 +54,29 @@ class HomeFragment : Fragment() {
 
         setUpEvents()
         setUpNoticeBoard()
+
+        binding.btnWebsite.setOnClickListener {
+            // custom browse
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://hithaldia.ac.in/"))
+        }
+
+        binding.btnFaculity.setOnClickListener {
+            val fragment= FacultyFragment()
+            val transaction=requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame,fragment)
+            transaction.commit()
+            activity?.findViewById<NavigationView>(R.id.navigationView)?.setCheckedItem(R.id.faculty)
+        }
+
+        binding.btnAcademics.setOnClickListener {
+            val fragment= AcademicsFragment()
+            val transaction=requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame,fragment)
+            transaction.commit()
+            activity?.findViewById<NavigationView>(R.id.navigationView)?.setCheckedItem(R.id.academics)
+        }
 
         binding.marqueeText.isSelected = true
         imageList = ArrayList()
@@ -112,4 +139,5 @@ class HomeFragment : Fragment() {
         binding.noticeBoard.adapter=noticeBoardAdapter
         binding.noticeBoard.layoutManager=LinearLayoutManager(binding.root.context)
     }
+
 }
