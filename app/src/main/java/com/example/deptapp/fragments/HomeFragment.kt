@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
         )
         imageList.add(
             SlideModel(
-                "https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Fthree-min.JPG?alt=media&token=26feb110-4f7b-45eb-8ec2-80769de26f44",
+                "https://firebasesztorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Fthree-min.JPG?alt=media&token=26feb110-4f7b-45eb-8ec2-80769de26f44",
                 "ACM Hack Track Workshop"
             )
         )
