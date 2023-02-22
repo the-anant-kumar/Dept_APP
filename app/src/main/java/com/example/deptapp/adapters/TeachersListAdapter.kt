@@ -12,13 +12,13 @@ import com.bumptech.glide.Glide
 import com.example.deptapp.R
 import com.example.deptapp.data.TeacherData
 
-class TeachersListAdapter() :
+class TeachersListAdapter(private val listener: TeacherItemClicked) :
     RecyclerView.Adapter<TeachersListAdapter.TeachersListViewHolder>() {
     class TeachersListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val teacherImg: ImageView = itemView.findViewById(R.id.ivItemTeacher)
-        val teacherName: TextView = itemView.findViewById(R.id.tvNameItemTeacher)
-        val teacherDesignation: TextView = itemView.findViewById(R.id.tvDesignationItemTeacher)
-        val teacherEmail: TextView = itemView.findViewById(R.id.tvEmailItemTeacher)
+        val teacherImg: ImageView = itemView.findViewById(R.id.ivTeacherPopup)
+        val teacherName: TextView = itemView.findViewById(R.id.tvNameTeacherPopup)
+        val teacherDesignation: TextView = itemView.findViewById(R.id.tvDesignationTeacherPopup)
+        val teacherEmail: TextView = itemView.findViewById(R.id.tvGenderTeacherPopup)
     }
 
     private val differCallback = object : DiffUtil.ItemCallback<TeacherData>() {
@@ -35,7 +35,11 @@ class TeachersListAdapter() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeachersListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_teacher, parent, false)
-        return TeachersListViewHolder(view)
+        val viewHolder = TeachersListViewHolder(view)
+//        view.setOnClickListener {
+//            listener.onItemClick(differ.currentList[viewHolder.adapterPosition])
+//        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: TeachersListViewHolder, position: Int) {
@@ -47,6 +51,9 @@ class TeachersListAdapter() :
         holder.teacherName.text = teacher.teacherName
         holder.teacherDesignation.text = teacher.teacherDesignation
         holder.teacherEmail.text = teacher.teacherEmail
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(teacher)
+        }
 //        Glide.with(holder.itemView)
 //            .load("https://thumbs.dreamstime.com/b/businessman-profile-icon-male-portrait-flat-design-vector-illustration-47075259.jpg")
 //            .into(holder.teacherImg)
@@ -56,4 +63,8 @@ class TeachersListAdapter() :
         return differ.currentList.size
     }
 
+}
+
+interface TeacherItemClicked{
+    fun onItemClick(item: TeacherData)
 }

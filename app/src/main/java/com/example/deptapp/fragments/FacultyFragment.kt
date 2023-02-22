@@ -6,32 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
+import com.bumptech.glide.Glide
+import com.example.deptapp.R
+import com.example.deptapp.adapters.TeacherItemClicked
 import com.example.deptapp.adapters.TeachersListAdapter
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.data.TeacherData
 import com.example.deptapp.databinding.FragmentFacultyBinding
+import com.orhanobut.dialogplus.DialogPlus
+import com.orhanobut.dialogplus.ViewHolder
 
-class FacultyFragment : Fragment() {
+class FacultyFragment : Fragment(), TeacherItemClicked {
 
     private lateinit var binding: FragmentFacultyBinding
     private lateinit var mTeachersListAdapter: TeachersListAdapter
-
-    var itemLists = arrayListOf(
-        Triple("Soumen Paul", "Head of Department", "spaul234@gmail.com"),
-        Triple("Manasija Bhattacharya", "Asst. Professor", "mb332@gmail.com"),
-        Triple("Tamosa Chakraborty", "Asst. Professor", "tamosa32it@gmail.com"),
-        Triple("Banani Ghosh", "Asst. Professor", "banani23@gmail.com"),
-        Triple("Ramkrishna Ghosh","Assoc. Professor", "ramkrishna@gmail.com"),
-        Triple("Pijush Bair","Asst. Professor", "pbairi@gmail.com"),
-        Triple("Debolina Ghosh","Asst. Professor", "dghosh@gmail.com"),
-        Triple("Arundhati Bhowal", "Asst. Professor","ab23@gmail.com"),
-        Triple("Bidyut Das ", "Assoc. Professor", "bidyut23@gmail.com"),
-        Triple("Moumita Ghosh", "Asst. Professor", "mgh@gmail.com")
-    )
+    lateinit var dialogPlus: DialogPlus
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +40,7 @@ class FacultyFragment : Fragment() {
     }
 
     private fun setupTeachersList() {
-        mTeachersListAdapter = TeachersListAdapter()
+        mTeachersListAdapter = TeachersListAdapter(this)
         binding.rvTeacher.adapter = mTeachersListAdapter
         binding.rvTeacher.layoutManager = LinearLayoutManager(binding.root.context)
     }
@@ -82,5 +76,37 @@ class FacultyFragment : Fragment() {
         ){
         }
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
+    }
+
+    private fun TeacherPopup(item: TeacherData) {
+        dialogPlus = DialogPlus.newDialog(binding.root.context).setContentHolder(ViewHolder(R.layout.teacher_popup))
+            .setExpanded(true,1000)
+            .setCancelable(true)
+            .create()
+
+        dialogPlus.show()
+
+        val view = dialogPlus.holderView
+        val image = view.findViewById<ImageView>(R.id.ivTeacherPopup)
+        val name = view.findViewById<TextView>(R.id.tvNameTeacherPopup)
+        val designation = view.findViewById<TextView>(R.id.tvDesignationTeacherPopup)
+        val gender = view.findViewById<TextView>(R.id.tvGenderTeacherPopup)
+        val specialization = view.findViewById<TextView>(R.id.tvSpecializationTeacherPopup)
+        val phone = view.findViewById<TextView>(R.id.tvMobTeacherPopup)
+        val email = view.findViewById<TextView>(R.id.tvEmailTeacherPopup)
+
+        Glide.with(image)
+            .load("https://thumbs.dreamstime.com/b/businessman-profile-icon-male-portrait-flat-design-vector-illustration-47075259.jpg")
+            .into(image)
+        name.text = item.teacherName
+        designation.text = item.teacherDesignation
+        gender.text = item.teacherGender
+        specialization.text = item.teacherSpecialization
+        phone.text = item.teacherPhoneNo
+        email.text = item.teacherEmail
+    }
+
+    override fun onItemClick(item: TeacherData) {
+       TeacherPopup(item)
     }
 }
