@@ -37,6 +37,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun fetchData() {
+        binding.bookLoader.visibility=View.VISIBLE
         val url =
             "https://script.google.com/macros/s/AKfycbzjpnA_Ufjcc6PavY-8WimLbS95D7CwCo_owwEwzMCJVyYG9u3GEShND-hR9wKyiw-T/exec"
 
@@ -45,6 +46,7 @@ class LibraryFragment : Fragment() {
             url,
             null,
             Response.Listener {
+                binding.bookLoader.visibility=View.INVISIBLE
 
                 val newsJsonArray = it.getJSONArray("data")
                 val newsArray = ArrayList<BookData>()
@@ -57,7 +59,7 @@ class LibraryFragment : Fragment() {
                     )
                     newsArray.add(news)
                 }
-                mBooksListAdapter.updateNews(newsArray)
+                mBooksListAdapter.differ.submitList(newsArray)
             },
             Response.ErrorListener {
             }

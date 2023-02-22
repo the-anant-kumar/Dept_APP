@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView.AdapterContextMenuInfo
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
@@ -103,9 +104,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawers()
-        }else{
+        } else {
             when (supportFragmentManager.findFragmentById(R.id.frame)) {
                 !is HomeFragment -> {
                     openDashboard()
@@ -115,21 +116,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun openDashboard()
-    {
-        val fragment= HomeFragment()
-        val transaction=supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frame,fragment)
+    private fun openDashboard() {
+        val fragment = HomeFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame, fragment)
         transaction.commit()
         binding.navigationView.setCheckedItem(R.id.home)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        if (id == android.R.id.home) {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun setupToolbar() {
@@ -138,8 +130,26 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu);
         return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == android.R.id.home) {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+        if (id == R.id.user) {
+            val fragment = LogInFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame, fragment)
+            transaction.commit()
+           binding.navigationView.setCheckedItem(R.id.admin)
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

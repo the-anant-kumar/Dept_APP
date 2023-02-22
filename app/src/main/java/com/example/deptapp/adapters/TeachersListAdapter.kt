@@ -14,6 +14,7 @@ import com.example.deptapp.data.TeacherData
 
 class TeachersListAdapter(private val listener: TeacherItemClicked) :
     RecyclerView.Adapter<TeachersListAdapter.TeachersListViewHolder>() {
+
     class TeachersListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val teacherImg: ImageView = itemView.findViewById(R.id.ivTeacherPopup)
         val teacherName: TextView = itemView.findViewById(R.id.tvNameTeacherPopup)
