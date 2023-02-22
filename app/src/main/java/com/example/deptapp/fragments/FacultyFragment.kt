@@ -68,7 +68,6 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
                     mTeachersArray.add(teachers)
                 }
                 mTeachersListAdapter.differ.submitList(mTeachersArray)
-//                mAdapter.updateNews(mTeachersArray)
             },
             {
                 Log.d("Error: ", it.toString())

@@ -35,11 +35,7 @@ class TeachersListAdapter(private val listener: TeacherItemClicked) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeachersListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_teacher, parent, false)
-        val viewHolder = TeachersListViewHolder(view)
-//        view.setOnClickListener {
-//            listener.onItemClick(differ.currentList[viewHolder.adapterPosition])
-//        }
-        return viewHolder
+        return TeachersListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TeachersListViewHolder, position: Int) {
@@ -54,9 +50,6 @@ class TeachersListAdapter(private val listener: TeacherItemClicked) :
         holder.itemView.setOnClickListener {
             listener.onItemClick(teacher)
         }
-//        Glide.with(holder.itemView)
-//            .load("https://thumbs.dreamstime.com/b/businessman-profile-icon-male-portrait-flat-design-vector-illustration-47075259.jpg")
-//            .into(holder.teacherImg)
     }
 
     override fun getItemCount(): Int {
