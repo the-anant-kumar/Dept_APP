@@ -8,9 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.deptapp.R
+import com.example.deptapp.data.BookData
 
-class BooksListAdapter(private val itemsList: ArrayList<Triple<String, String, String>>) :
+class BooksListAdapter() :
     RecyclerView.Adapter<BooksListAdapter.BooksListViewHolder>() {
+
+    private val items: ArrayList<BookData> = ArrayList()
 
     class BooksListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bookTitle: TextView = itemView.findViewById(R.id.tvBookTitle)
@@ -24,13 +27,22 @@ class BooksListAdapter(private val itemsList: ArrayList<Triple<String, String, S
     }
 
     override fun onBindViewHolder(holder: BooksListViewHolder, position: Int) {
-        holder.bookTitle.text=itemsList[position].first
-        holder.bookAuthor.text=itemsList[position].second
-        holder.bookCategory.text=itemsList[position].third
+        holder.bookTitle.text=items[position].bookTitle
+        holder.bookAuthor.text=items[position].bookAuthor
+        holder.bookCategory.text=items[position].bookCategory
     }
 
     override fun getItemCount(): Int {
-        return   itemsList.size
+        return   items.size
+    }
+
+    fun updateNews(updatedNews: ArrayList<BookData>)
+    {
+        items.clear()
+        items.addAll(updatedNews)
+
+        ///it's call again whole Adapter work
+        notifyDataSetChanged()
     }
 
 }

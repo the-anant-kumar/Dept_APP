@@ -6,8 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.deptapp.R
 import com.example.deptapp.adapters.TeachersListAdapter
+import com.example.deptapp.data.MySingleton
+import com.example.deptapp.data.TeacherData
 import com.example.deptapp.databinding.FragmentFacultyBinding
 
 class FacultyFragment : Fragment() {
@@ -44,5 +49,4 @@ class FacultyFragment : Fragment() {
         binding.rvTeacher.adapter = teachersListAdapter
         binding.rvTeacher.layoutManager = LinearLayoutManager(binding.root.context)
     }
-
 }
