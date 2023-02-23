@@ -5,20 +5,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SocietyFragment"
-    android:orientation="vertical"
-    android:padding="7dp">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/acm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
+        android:textSize="25sp"
         android:textColor="@color/main_color"
         android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:fontFamily="serif"
-        android:text="Association for Computing Machinery"
+        android:text="SOCIETY"
         />
+
 
 
     <ScrollView
@@ -32,25 +33,40 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/imageSlidersocietyFrag"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="5"
+                app:iss_delay="0"
+                app:iss_error_image="@android:color/darker_gray"
+                app:iss_period="2000"
+                app:iss_placeholder="@android:color/darker_gray"
+                app:iss_selected_dot="@drawable/default_selected_dot"
+                app:iss_text_align=""
+                android:background="@color/white"
+                app:iss_unselected_dot="@drawable/default_unselected_dot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:padding="5dp"
+                android:layout_marginTop="5dp"
                 android:gravity="fill_horizontal|fill_vertical"
                 android:fontFamily="serif"
-                android:text="ACM brings together computing educators, researchers, and professionals to inspire dialogue, share resources, and address the field's challenges. As the world’s largest computing society, ACM strengthens the profession's collective voice through strong leadership, promotion of the highest standards, and recognition of technical excellence. ACM supports the professional growth of its members by providing opportunities for life‐long learning, career development, and professional networking." />
+                android:text="The Association for Computing Machinery (ACM) is the world’s largest educational and scientific society uniting professionals, educators and researchers in the field of computer science to inspire dialogue, share resources and address the challenges in the domain. The purpose of this organization is to advance the scientific development, construction and application of the new machinery for computing, reasoning, and handling of information. The mission is to offer the students an opportunity to learn, innovate and grow into intellectuals, visionaries and technocrats, who contribute to promoting the advancements in science and technology. The ACM India Council is an effort of ACM aimed at improving the level of ACM activities across the country." />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:src="@drawable/acm_img"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:padding="5dp"
                 android:background="@drawable/under_line">
 
                 <TextView
@@ -60,7 +76,7 @@
                     android:gravity="center"
                     android:text="Recent Activities"
                     android:textAlignment="center"
-                    android:textColor="@color/main_color"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -73,8 +89,8 @@
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
                     android:text="view more"
-                    android:textColor="@color/main_color"
-                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -91,7 +107,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
-                android:src="@drawable/acm_img1"/>
+                android:src="@drawable/acm_img1"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -145,10 +162,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
-
-
-
 
 
     </ScrollView>
