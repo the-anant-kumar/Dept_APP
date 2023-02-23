@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.deptapp.R
 import com.example.deptapp.databinding.FragmentLogInBinding
 import com.example.deptapp.databinding.FragmentSocietyBinding
+import com.google.android.material.navigation.NavigationView
 
 
 class SocietyFragment : Fragment() {
@@ -23,7 +25,7 @@ class SocietyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-         binding = FragmentSocietyBinding.inflate(layoutInflater, container, false)
+        binding = FragmentSocietyBinding.inflate(layoutInflater, container, false)
         imageList = ArrayList()
 
         imageList.add(
@@ -58,26 +60,26 @@ class SocietyFragment : Fragment() {
             )
         )
         binding.imageSlidersocietyFrag.setImageList(imageList)
+
+        Glide.with(binding.root.context)
+            .load("https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72")
+            .into(binding.imgSocEvent1)
+        Glide.with(binding.root.context)
+            .load("https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72")
+            .into(binding.imgSocEvent2)
+        binding.tvBtnSocEventViewMore.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("name", "EVENTS")
+            val fragment = EventFragment()
+            fragment.arguments = bundle
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame, fragment)
+            transaction.commit()
+            requireActivity().findViewById<NavigationView>(R.id.navigationView).checkedItem?.isChecked =
+                false
+        }
+
         return binding.root
     }
 
-    /*companion object {
-        *//**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SocietyFragment.
-         *//*
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SocietyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }*/
 }

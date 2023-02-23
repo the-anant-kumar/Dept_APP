@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView.AdapterContextMenuInfo
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.deptapp.fragments.*
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         actionBarDrawerToggle.syncState()
 
         binding.navigationView.setNavigationItemSelectedListener {
-
+            binding.navigationView.checkedItem?.isChecked = true
             when (it.itemId) {
                 R.id.home -> {
                     supportFragmentManager.beginTransaction()
@@ -121,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frame, fragment)
         transaction.commit()
+        binding.navigationView.checkedItem?.isChecked = true
         binding.navigationView.setCheckedItem(R.id.home)
     }
 
@@ -141,13 +143,15 @@ class MainActivity : AppCompatActivity() {
         if (id == android.R.id.home) {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
-        if (id == R.id.user) {
-            val fragment = LogInFragment()
+        if (id == R.id.notification) {
+            val bundle=Bundle()
+            bundle.putString("name","NOTICE")
+            val fragment = EventFragment()
+            fragment.arguments=bundle
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frame, fragment)
             transaction.commit()
-           binding.navigationView.setCheckedItem(R.id.admin)
-
+            binding.navigationView.checkedItem?.isChecked = false
         }
         return super.onOptionsItemSelected(item)
     }

@@ -39,7 +39,8 @@ class LibraryFragment : Fragment() {
     private fun fetchData() {
         binding.bookLoader.visibility=View.VISIBLE
         val url =
-            "https://script.googleusercontent.com/macros/echo?user_content_key=uQVxQaStsxqFIIf-YaJcKuBTZlExM2SPRLxa_bWZHvaLKOHR33z_wKCpZxSexd5tGEZ7Rl3DAKOEGcc5XfCtP-JL4_mghDILm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnEytzYiCyJ3XJVI0jo9-Wkc30EP0fgIXyRDJRLPG-c5ZIhJLqi5hfvmTVuwYvc0RIC_Wz0-E8aGheONHA6hi9ni5BPxo4khIoA&lib=MpTEs8X7Wb53igLDKCnNo2btJ36oU3psL"
+            "https://script.google.com/macros/s/AKfycbzjpnA_Ufjcc6PavY-8WimLbS95D7CwCo_owwEwzMCJVyYG9u3GEShND-hR9wKyiw-T/exec"
+
         val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET,
             url,
@@ -54,7 +55,7 @@ class LibraryFragment : Fragment() {
                     val news = BookData(
                         newsJsonObject.getString("title"),
                         newsJsonObject.getString("author"),
-                        newsJsonObject.getString("subject"),
+                        newsJsonObject.getString("category"),
                     )
                     newsArray.add(news)
                 }
