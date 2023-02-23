@@ -107,7 +107,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.1"
+                    android:layout_weight="0.15"
                     android:background="@drawable/under_line">
 
                     <TextView
@@ -115,6 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:layout_marginStart="5dp"
                         android:text="Events"
                         android:textAlignment="center"
                         android:textColor="@color/black"
@@ -124,6 +125,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tvBtnEventViewMore"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
@@ -291,7 +293,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/background_assets"
                 android:orientation="vertical"
@@ -308,6 +310,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Noticed"
+                        android:layout_marginStart="5dp"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -316,6 +319,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tvBtnNoticeViewMore"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
@@ -330,8 +334,9 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/notice_board"
+                    android:layout_weight="0.9"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="2dp"/>
             </LinearLayout>
 
@@ -345,10 +350,12 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="22dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/under_line"
                     android:text="One Day at our College"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
+                    android:layout_marginStart="5dp"
                     android:textStyle="bold" />
 
                 <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
