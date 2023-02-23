@@ -43,7 +43,7 @@ class TeachersListAdapter(private val listener: TeacherItemClicked) :
         val teacher = differ.currentList[position]
 
         Glide.with(holder.itemView)
-            .load("https://thumbs.dreamstime.com/b/businessman-profile-icon-male-portrait-flat-design-vector-illustration-47075259.jpg")
+            .load(teacher.teacherImageUrl)
             .into(holder.teacherImg)
         holder.teacherName.text = teacher.teacherName
         holder.teacherDesignation.text = teacher.teacherDesignation
