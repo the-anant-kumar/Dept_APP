@@ -1,60 +1,86 @@
 package com.example.deptapp.fragments
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.deptapp.R
+import androidx.browser.customtabs.CustomTabsIntent
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.example.deptapp.data.MySingleton
+import com.example.deptapp.data.StudentData
+import com.example.deptapp.databinding.FragmentStudentsBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StudentsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StudentsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentStudentsBinding
+    val mStudentsArray = ArrayList<StudentData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_students, container, false)
+    ): View {
+        binding = FragmentStudentsBinding.inflate(layoutInflater, container, false)
+        fetchData()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StudentsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StudentsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun fetchData(){
+        binding.studentLoader.visibility = View.VISIBLE
+        val url = "https://ill-moth-stole.cyclic.app/api/student/fetch"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Request.Method.GET, url, null,
+            {
+                binding.studentLoader.visibility = View.INVISIBLE
+                val studentsJsonArray = it.getJSONArray("response")
+                for(i in 0 until studentsJsonArray.length()){
+                    val studentsJsonObject = studentsJsonArray.getJSONObject(i)
+                    val students = StudentData(
+                        studentsJsonObject.getString("batch"),
+                        studentsJsonObject.getString("pdfurl")
+                    )
+                    mStudentsArray.add(students)
                 }
+
+                binding.tvFourthYear.text = mStudentsArray[0].batch
+                binding.tvThirdYear.text = mStudentsArray[1].batch
+                binding.tvSecondYear.text = mStudentsArray[2].batch
+                binding.tvFirstYear.text = mStudentsArray[3].batch
+                binding.btnShowFourthYear.setOnClickListener {
+                    val pdfurl = mStudentsArray[0].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnShowThirdYear.setOnClickListener {
+                    val pdfurl = mStudentsArray[1].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnShowSecondYear.setOnClickListener {
+                    val pdfurl = mStudentsArray[2].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnShowFirstYear.setOnClickListener {
+                    val pdfurl = mStudentsArray[3].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+            },
+            {
+                Log.d("Error: ", it.toString())
             }
+        ){
+        }
+        MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
+
 }
