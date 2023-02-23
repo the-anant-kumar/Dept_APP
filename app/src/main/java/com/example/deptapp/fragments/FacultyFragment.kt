@@ -58,7 +58,7 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
                     val teachersJsonObject = teachersJsonArray.getJSONObject(i)
                     val teachers = TeacherData(
                         teachersJsonObject.getString("name"),
-                        teachersJsonObject.getString("filename"),
+                        teachersJsonObject.getString("imageurl"),
                         teachersJsonObject.getString("designation"),
                         teachersJsonObject.getString("email"),
                         teachersJsonObject.getString("mobile"),
@@ -95,7 +95,7 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
         val email = view.findViewById<TextView>(R.id.tvEmailTeacherPopup)
 
         Glide.with(image)
-            .load("https://thumbs.dreamstime.com/b/businessman-profile-icon-male-portrait-flat-design-vector-illustration-47075259.jpg")
+            .load(item.teacherImageUrl)
             .into(image)
         name.text = item.teacherName
         designation.text = item.teacherDesignation
