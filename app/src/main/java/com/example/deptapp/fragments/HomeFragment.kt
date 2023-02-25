@@ -1,6 +1,5 @@
 package com.example.deptapp.fragments
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.deptapp.R
-import com.example.deptapp.adapters.NoticeBoardAdapter
+import com.example.deptapp.adapters.NoticeListAdapter
 import com.example.deptapp.databinding.FragmentHomeBinding
 import com.google.android.material.navigation.NavigationView
 
@@ -30,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     lateinit var imageList: ArrayList<SlideModel>
-    lateinit var noticeBoardAdapter: NoticeBoardAdapter
+    lateinit var noticeListAdapter: NoticeListAdapter
     var itemLists = arrayListOf(
         "Minutes of the 141th Academic Council Meeting",
         "Minutes of the 141th Academic Council Meeting",
@@ -75,9 +74,29 @@ class HomeFragment : Fragment() {
             val transaction=requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frame,fragment)
             transaction.commit()
-            activity?.findViewById<NavigationView>(R.id.navigationView)?.setCheckedItem(R.id.academics)
+            requireActivity().findViewById<NavigationView>(R.id.navigationView)?.setCheckedItem(R.id.academics)
         }
 
+        binding.tvBtnEventViewMore.setOnClickListener {
+            val bundle=Bundle()
+            bundle.putString("name","EVENTS")
+            val fragment = EventFragment()
+            fragment.arguments=bundle
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame, fragment)
+            transaction.commit()
+            requireActivity().findViewById<NavigationView>(R.id.navigationView).checkedItem?.isChecked = false
+        }
+        binding.tvBtnNoticeViewMore.setOnClickListener {
+            val bundle=Bundle()
+            bundle.putString("name","NOTICE")
+            val fragment = EventFragment()
+            fragment.arguments=bundle
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame, fragment)
+            transaction.commit()
+            requireActivity().findViewById<NavigationView>(R.id.navigationView).checkedItem?.isChecked = false
+        }
         binding.marqueeText.isSelected = true
         imageList = ArrayList()
 
@@ -135,8 +154,8 @@ class HomeFragment : Fragment() {
 
 
     private fun setUpNoticeBoard() {
-        noticeBoardAdapter = NoticeBoardAdapter(binding.root.context, itemLists)
-        binding.noticeBoard.adapter=noticeBoardAdapter
+        noticeListAdapter = NoticeListAdapter(itemLists)
+        binding.noticeBoard.adapter=noticeListAdapter
         binding.noticeBoard.layoutManager=LinearLayoutManager(binding.root.context)
     }
 

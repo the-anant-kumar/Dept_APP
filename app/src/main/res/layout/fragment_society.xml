@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.SocietyFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".fragments.SocietyFragment">
 
     <TextView
         android:id="@+id/acm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textColor="@color/main_color"
-        android:textStyle="bold"
         android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
         android:fontFamily="serif"
+        android:gravity="center_horizontal"
         android:text="SOCIETY"
-        />
-
+        android:textColor="@color/main_color"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
 
     <ScrollView
@@ -37,6 +35,7 @@
                 android:id="@+id/imageSlidersocietyFrag"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
+                android:background="@color/white"
                 app:iss_auto_cycle="true"
                 app:iss_corner_radius="5"
                 app:iss_delay="0"
@@ -45,7 +44,6 @@
                 app:iss_placeholder="@android:color/darker_gray"
                 app:iss_selected_dot="@drawable/default_selected_dot"
                 app:iss_text_align=""
-                android:background="@color/white"
                 app:iss_unselected_dot="@drawable/default_unselected_dot"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,111 +52,120 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/black"
-                android:padding="5dp"
                 android:layout_marginTop="5dp"
-                android:gravity="fill_horizontal|fill_vertical"
                 android:fontFamily="serif"
-                android:text="The Association for Computing Machinery (ACM) is the world’s largest educational and scientific society uniting professionals, educators and researchers in the field of computer science to inspire dialogue, share resources and address the challenges in the domain. The purpose of this organization is to advance the scientific development, construction and application of the new machinery for computing, reasoning, and handling of information. The mission is to offer the students an opportunity to learn, innovate and grow into intellectuals, visionaries and technocrats, who contribute to promoting the advancements in science and technology. The ACM India Council is an effort of ACM aimed at improving the level of ACM activities across the country." />
+                android:gravity="fill_horizontal|fill_vertical"
+                android:padding="5dp"
+                android:text="The Association for Computing Machinery (ACM) is the world’s largest educational and scientific society uniting professionals, educators and researchers in the field of computer science to inspire dialogue, share resources and address the challenges in the domain. The purpose of this organization is to advance the scientific development, construction and application of the new machinery for computing, reasoning, and handling of information. The mission is to offer the students an opportunity to learn, innovate and grow into intellectuals, visionaries and technocrats, who contribute to promoting the advancements in science and technology. The ACM India Council is an effort of ACM aimed at improving the level of ACM activities across the country."
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:background="@drawable/under_line">
+                android:layout_height="30dp"
+                android:backgroundTint="#F3F3F3"
+                android:background="@drawable/under_line"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:fontFamily="serif"
                     android:gravity="center"
                     android:text="Recent Activities"
                     android:textAlignment="center"
                     android:textColor="@color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tvBtnSocEventViewMore"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:fontFamily="serif"
                     android:gravity="center"
-                    android:text="view more"
-                    android:textColor="@color/black"
+                    android:text="SHOW MORE"
+                    android:textColor="@color/purple_500"
                     android:textSize="10sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="vertical"
-            android:background="#F3F3F3">
-
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:src="@drawable/acm_img1"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="February 22, 2023"
-                android:textSize="10sp" />
+                android:background="#F3F3F3"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.3"
-                android:gravity="center_vertical"
-                android:maxLines="3"
-                android:padding="3dp"
-                android:text="Networking opportunities in ACM’s 38 Special Interest Groups (SIGs) are always expanding, reflecting the growth of computing’s discrete disciplines and technical communities. The leading representatives of their fields, ACM SIGs sponsor annual conferences, workshops, and symposia serving practitioner‐ and research‐based constituencies. Because they provide objective arenas for novel, often competing ideas, "
-                android:minLines="3"
-                android:ellipsize="end"
-                android:textColor="@color/black"/>
+                <ImageView
+                    android:id="@+id/imgSocEvent1"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/acm_img1" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvSocEventTime1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="February 22, 2023"
+                    android:layout_marginStart="5dp"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvSocEventTitle1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Networking opportunities in ACM’s 38 Special Interest Groups (SIGs) are always expanding, reflecting the growth of computing’s discrete disciplines and technical communities. The leading representatives of their fields, ACM SIGs sponsor annual conferences, workshops, and symposia serving practitioner‐ and research‐based constituencies. Because they provide objective arenas for novel, often competing ideas, "
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:orientation="vertical"
-                android:background="#F4EEEE">
+                android:layout_marginTop="10dp"
+                android:background="#F3F3F3"
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imgSocEvent2"
                     android:layout_width="match_parent"
                     android:layout_height="230dp"
-                    android:src="@drawable/acm_img1"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/acm_img1" />
 
                 <TextView
+                    android:id="@+id/tvSocEventTime2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="February 22, 2023"
+                    android:layout_marginStart="5dp"
                     android:textSize="10sp" />
 
                 <TextView
+                    android:id="@+id/tvSocEventTitle2"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3"
-                    android:gravity="center_vertical"
-                    android:maxLines="3"
-                    android:padding="3dp"
-                    android:text="Networking opportunities in ACM’s 38 Special Interest Groups (SIGs) are always expanding, reflecting the growth of computing’s discrete disciplines and technical communities. The leading representatives of their fields, ACM SIGs sponsor annual conferences, workshops, and symposia serving practitioner‐ and research‐based constituencies. Because they provide objective arenas for novel, often competing ideas, "
-                    android:minLines="3"
+                    android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:textColor="@color/black"/>
+                    android:maxLines="3"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:text="Networking opportunities in ACM’s 38 Special Interest Groups (SIGs) are always expanding, reflecting the growth of computing’s discrete disciplines and technical communities. The leading representatives of their fields, ACM SIGs sponsor annual conferences, workshops, and symposia serving practitioner‐ and research‐based constituencies. Because they provide objective arenas for novel, often competing ideas, "
+                    android:textColor="@color/black" />
 
             </LinearLayout>
         </LinearLayout>
