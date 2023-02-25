@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.toolbox.JsonObjectRequest
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.deptapp.R
+import com.example.deptapp.adapters.EventItemClicked
 import com.example.deptapp.adapters.EventListAdapter
 import com.example.deptapp.adapters.NoticeItemClicked
 import com.example.deptapp.adapters.NoticeListAdapter
@@ -18,8 +22,7 @@ import com.example.deptapp.data.NoticeData
 import com.example.deptapp.databinding.FragmentEventBinding
 
 
-class EventFragment : Fragment(), NoticeItemClicked {
-
+class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
     lateinit var binding: FragmentEventBinding
     lateinit var noticeListAdapter: NoticeListAdapter
     lateinit var eventListAdapter: EventListAdapter
@@ -77,7 +80,7 @@ class EventFragment : Fragment(), NoticeItemClicked {
     {
         binding.rvNotice.visibility=View.GONE
         binding.rvEvent.visibility=View.VISIBLE
-        eventListAdapter = EventListAdapter(itemLists)
+        eventListAdapter = EventListAdapter(itemLists,this)
         binding.rvEvent.adapter=eventListAdapter
         binding.rvEvent.layoutManager= LinearLayoutManager(binding.root.context)
     }
@@ -116,4 +119,7 @@ class EventFragment : Fragment(), NoticeItemClicked {
         customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
     }
 
+    override fun onItemClick(item: String) {
+        Toast.makeText(binding.root.context,item,Toast.LENGTH_SHORT).show()
+    }
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +19,16 @@ import com.example.deptapp.adapters.EventList2Adapter
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.data.NoticeData
 import com.example.deptapp.data.TeacherData
+
+import com.example.deptapp.adapters.*
+
 import com.example.deptapp.databinding.FragmentHomeBinding
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.*
 
 
-class HomeFragment : Fragment() {
+
+class HomeFragment : Fragment(), EventItem2Clicked {
     lateinit var binding: FragmentHomeBinding
     lateinit var imageList: ArrayList<SlideModel>
     lateinit var eventListAdapter: EventList2Adapter
@@ -141,13 +146,12 @@ class HomeFragment : Fragment() {
             )
         )
         binding.imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
-
         return binding.root
     }
 
     private fun setUpEvent()
     {
-        eventListAdapter = EventList2Adapter(itemLists)
+        eventListAdapter = EventList2Adapter(itemLists,this)
         binding.rvEvents.adapter=eventListAdapter
         binding.rvEvents.layoutManager= LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
     }
@@ -223,5 +227,8 @@ class HomeFragment : Fragment() {
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
         }
+    }
+    override fun onItemClick(item: String) {
+        Toast.makeText(binding.root.context,item, Toast.LENGTH_SHORT).show()
     }
 }
