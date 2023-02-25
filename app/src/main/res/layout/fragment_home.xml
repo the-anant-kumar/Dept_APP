@@ -259,7 +259,8 @@
                         <TextView
                             android:id="@+id/noticeClick1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="center_vertical"
                             android:layout_marginEnd="10dp"
                             android:maxLines="1"
                             android:text="Click for Details"
@@ -288,7 +289,7 @@
                             app:lottie_rawRes="@raw/new_" />
 
                         <TextView
-                            android:id="@+id/noticeTitle"
+                            android:id="@+id/noticeTitle2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
@@ -297,14 +298,14 @@
                             android:text="@string/demoText"
                             android:textColor="@color/black"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/noticeClick"
+                            app:layout_constraintEnd_toStartOf="@+id/noticeClick2"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toEndOf="@+id/lottieAnimationView2"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.29000002" />
 
                         <TextView
-                            android:id="@+id/noticeDate"
+                            android:id="@+id/noticeDate2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:maxLines="1"
@@ -312,12 +313,13 @@
                             android:textColor="@color/black"
                             android:textSize="10sp"
                             app:layout_constraintStart_toEndOf="@+id/lottieAnimationView2"
-                            app:layout_constraintTop_toBottomOf="@+id/noticeTitle" />
+                            app:layout_constraintTop_toBottomOf="@+id/noticeTitle2" />
 
                         <TextView
-                            android:id="@+id/noticeClick"
+                            android:id="@+id/noticeClick2"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="center_vertical"
                             android:layout_marginEnd="10dp"
                             android:maxLines="1"
                             android:text="Click for Details"
@@ -375,7 +377,8 @@
                         <TextView
                             android:id="@+id/noticeClick3"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="center_vertical"
                             android:layout_marginEnd="10dp"
                             android:maxLines="1"
                             android:text="Click for Details"
@@ -433,7 +436,8 @@
                         <TextView
                             android:id="@+id/noticeClick4"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="center_vertical"
                             android:layout_marginEnd="10dp"
                             android:maxLines="1"
                             android:text="Click for Details"
@@ -491,7 +495,8 @@
                         <TextView
                             android:id="@+id/noticeClick5"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="center_vertical"
                             android:layout_marginEnd="10dp"
                             android:maxLines="1"
                             android:text="Click for Details"
@@ -543,7 +548,8 @@
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Connect with us"

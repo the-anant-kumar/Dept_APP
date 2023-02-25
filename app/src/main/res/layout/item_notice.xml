@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/noticeTitle"
+        android:id="@+id/noticeTitle2"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.24000001" />
 
     <TextView
-        android:id="@+id/noticeDate"
+        android:id="@+id/noticeDate2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -39,10 +39,10 @@
         android:textColor="@color/black"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/lottieAnimationView2"
-        app:layout_constraintTop_toBottomOf="@+id/noticeTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/noticeTitle2" />
 
     <TextView
-        android:id="@+id/noticeClick"
+        android:id="@+id/noticeClick2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
