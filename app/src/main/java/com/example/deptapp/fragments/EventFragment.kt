@@ -11,8 +11,6 @@ import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.toolbox.JsonObjectRequest
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.deptapp.R
 import com.example.deptapp.adapters.EventItemClicked
 import com.example.deptapp.adapters.EventListAdapter
 import com.example.deptapp.adapters.NoticeItemClicked
