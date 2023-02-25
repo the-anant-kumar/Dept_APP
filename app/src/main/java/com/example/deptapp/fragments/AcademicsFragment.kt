@@ -1,60 +1,131 @@
 package com.example.deptapp.fragments
 
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.deptapp.R
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.example.deptapp.data.MySingleton
+import com.example.deptapp.data.RoutineData
+import com.example.deptapp.data.SyllabusData
+import com.example.deptapp.databinding.FragmentAcademicsBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AcademicsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AcademicsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentAcademicsBinding
+    val mRoutineArray = ArrayList<RoutineData>()
+    val mSyllabusArray = ArrayList<SyllabusData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_academics, container, false)
+    ): View {
+        binding = FragmentAcademicsBinding.inflate(layoutInflater, container, false)
+        fetchDataRoutine()
+        fetchDataSyllabus()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AcademicsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AcademicsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun fetchDataRoutine(){
+        val url = "https://ill-moth-stole.cyclic.app/api/routine/fetch"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Request.Method.GET, url, null,
+            {
+                val routineJsonArray = it.getJSONArray("response")
+                for(i in 0 until routineJsonArray.length()){
+                    val routineJsonObject = routineJsonArray.getJSONObject(i)
+                    val routine = RoutineData(
+                        routineJsonObject.getString("batch"),
+                        routineJsonObject.getString("pdfurl")
+                    )
+                    mRoutineArray.add(routine)
                 }
+
+                binding.btnRoutinesForthYear.setOnClickListener {
+                    val pdfurl = mRoutineArray[0].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnRoutinesThirdYear.setOnClickListener {
+                    val pdfurl = mRoutineArray[1].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnRoutinesSecondYear.setOnClickListener {
+                    val pdfurl = mRoutineArray[2].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnRoutinesFirstYear.setOnClickListener {
+                    val pdfurl = mRoutineArray[3].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+            },
+            {
+                Log.d("Error: ", it.toString())
             }
+        ){
+        }
+        MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
+
+    private fun fetchDataSyllabus(){
+        val url = "https://ill-moth-stole.cyclic.app/api/syllabus/fetch"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Request.Method.GET, url, null,
+            {
+                val syllabusJsonArray = it.getJSONArray("response")
+                for(i in 0 until syllabusJsonArray.length()){
+                    val syllabusJsonObject = syllabusJsonArray.getJSONObject(i)
+                    val syllabus = SyllabusData(
+                        syllabusJsonObject.getString("batch"),
+                        syllabusJsonObject.getString("pdfurl")
+                    )
+                    mSyllabusArray.add(syllabus)
+                }
+
+                binding.btnSyllabusFourthYear.setOnClickListener {
+                    val pdfurl = mSyllabusArray[0].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnSyllabusThirdYear.setOnClickListener {
+                    val pdfurl = mSyllabusArray[1].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnSyllabusSecondYear.setOnClickListener {
+                    val pdfurl = mSyllabusArray[2].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+                binding.btnSyllabusFirstYear.setOnClickListener {
+                    val pdfurl = mSyllabusArray[3].pdfurl
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                }
+            },
+            {
+                Log.d("Error: ", it.toString())
+            }
+        ){
+        }
+        MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
+    }
+
 }

@@ -49,7 +49,7 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
         binding.teacherLoader.visibility = View.VISIBLE
         val url = "https://ill-moth-stole.cyclic.app/api/teacher/fetch"
         val jsonObjectRequest = object : JsonObjectRequest(
-            Request.Method.GET, url, null,
+            Method.GET, url, null,
             {
                 binding.teacherLoader.visibility = View.INVISIBLE
                 val teachersJsonArray = it.getJSONArray("tres")
@@ -82,7 +82,6 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
             .setExpanded(true,1000)
             .setCancelable(true)
             .create()
-
         dialogPlus.show()
 
         val view = dialogPlus.holderView

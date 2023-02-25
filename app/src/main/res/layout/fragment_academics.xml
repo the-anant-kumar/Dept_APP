@@ -42,6 +42,7 @@
             app:layout_constraintLeft_toLeftOf="parent">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnRoutinesFirstYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
@@ -83,6 +84,7 @@
             android:layout_margin="10dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnRoutinesSecondYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
@@ -124,6 +126,7 @@
             app:layout_constraintTop_toBottomOf="@+id/l1">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnRoutinesThirdYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
@@ -163,6 +166,7 @@
             android:layout_margin="10dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnRoutinesForthYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
@@ -232,6 +236,7 @@
             app:layout_constraintLeft_toLeftOf="parent">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnSyllabusFirstYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
@@ -274,6 +279,7 @@
             android:layout_margin="10dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnSyllabusSecondYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
@@ -315,6 +321,7 @@
             app:layout_constraintTop_toBottomOf="@+id/l5">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnSyllabusThirdYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
@@ -354,6 +361,7 @@
             android:layout_margin="10dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnSyllabusFourthYear"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_row="0"
