@@ -5,14 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.deptapp.R
+import com.example.deptapp.adapters.EventItemClicked
 import com.example.deptapp.adapters.EventListAdapter
 import com.example.deptapp.adapters.NoticeListAdapter
 import com.example.deptapp.databinding.FragmentEventBinding
 
 
-class EventFragment : Fragment() {
+class EventFragment : Fragment(), EventItemClicked {
 
     lateinit var binding: FragmentEventBinding
     lateinit var noticeListAdapter: NoticeListAdapter
@@ -67,8 +69,12 @@ class EventFragment : Fragment() {
     {
         binding.rvNotice.visibility=View.GONE
         binding.rvEvent.visibility=View.VISIBLE
-        eventListAdapter = EventListAdapter(itemLists)
+        eventListAdapter = EventListAdapter(itemLists,this)
         binding.rvEvent.adapter=eventListAdapter
         binding.rvEvent.layoutManager= LinearLayoutManager(binding.root.context)
+    }
+
+    override fun onItemClick(item: String) {
+        Toast.makeText(binding.root.context,item,Toast.LENGTH_SHORT).show()
     }
 }

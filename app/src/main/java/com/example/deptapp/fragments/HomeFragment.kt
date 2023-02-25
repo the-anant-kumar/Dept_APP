@@ -7,15 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.deptapp.R
-import com.example.deptapp.adapters.EventList2Adapter
-import com.example.deptapp.adapters.EventListAdapter
-import com.example.deptapp.adapters.NoticeListAdapter
+import com.example.deptapp.adapters.*
 import com.example.deptapp.databinding.FragmentHomeBinding
 import com.google.android.material.navigation.NavigationView
 
@@ -29,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), EventItem2Clicked {
     lateinit var binding: FragmentHomeBinding
     lateinit var imageList: ArrayList<SlideModel>
     lateinit var eventListAdapter: EventList2Adapter
@@ -141,16 +140,18 @@ class HomeFragment : Fragment() {
             )
         )
         binding.imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
-        binding.imageSlider.textAlignment=
-
         return binding.root
     }
 
     private fun setUpEvent()
     {
-        eventListAdapter = EventList2Adapter(itemLists)
+        eventListAdapter = EventList2Adapter(itemLists,this)
         binding.rvEvents.adapter=eventListAdapter
         binding.rvEvents.layoutManager= LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
+    }
+
+    override fun onItemClick(item: String) {
+        Toast.makeText(binding.root.context,item, Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -8,8 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.deptapp.R
+import com.example.deptapp.data.EventData
+import com.example.deptapp.data.TeacherData
 
-class EventList2Adapter(private val items:ArrayList<String>) : RecyclerView.Adapter<EventList2Adapter.EventViewHolder>() {
+class EventList2Adapter(
+    private val items: ArrayList<String>,
+    private val listener: EventItem2Clicked
+) : RecyclerView.Adapter<EventList2Adapter.EventViewHolder>() {
 
     class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val eventTitle: TextView = view.findViewById(R.id.tvEventTitle)
@@ -17,8 +22,8 @@ class EventList2Adapter(private val items:ArrayList<String>) : RecyclerView.Adap
         val eventImage: ImageView = view.findViewById(R.id.imgEvent)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  EventViewHolder{
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event2,parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event2, parent, false)
         return EventViewHolder(view)
     }
 
@@ -28,6 +33,15 @@ class EventList2Adapter(private val items:ArrayList<String>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        Glide.with(holder.itemView).load("https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72").into(holder.eventImage)
+        Glide.with(holder.itemView)
+            .load("https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72")
+            .into(holder.eventImage)
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(items[position])
+        }
     }
+}
+
+interface EventItem2Clicked {
+    fun onItemClick(item: String)
 }
