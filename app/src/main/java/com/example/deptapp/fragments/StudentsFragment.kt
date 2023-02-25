@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -51,32 +52,32 @@ class StudentsFragment : Fragment() {
                 binding.tvSecondYear.text = mStudentsArray[2].batch
                 binding.tvFirstYear.text = mStudentsArray[3].batch
                 binding.btnShowFourthYear.setOnClickListener {
-                    val pdfurl = mStudentsArray[0].pdfurl
+                    val pdfUrl = mStudentsArray[0].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
                 binding.btnShowThirdYear.setOnClickListener {
-                    val pdfurl = mStudentsArray[1].pdfurl
+                    val pdfUrl = mStudentsArray[1].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
                 binding.btnShowSecondYear.setOnClickListener {
-                    val pdfurl = mStudentsArray[2].pdfurl
+                    val pdfUrl = mStudentsArray[2].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
                 binding.btnShowFirstYear.setOnClickListener {
-                    val pdfurl = mStudentsArray[3].pdfurl
+                    val pdfUrl = mStudentsArray[3].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
             },
             {
-                Log.d("Error: ", it.toString())
+                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
             }
         ){
         }

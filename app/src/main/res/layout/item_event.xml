@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_marginBottom="8dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/under_line"
-        android:backgroundTint="#F3F3F3"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +17,6 @@
         <ImageView
             android:id="@+id/imageEvent"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img" />
@@ -28,7 +25,7 @@
             android:id="@+id/tvEventTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:maxLines="3"
             android:text="12/01/2023"
             android:textSize="12sp" />
@@ -36,15 +33,15 @@
         <TextView
             android:id="@+id/tvEventTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:maxLines="3"
-            android:text="Chack you luck from your love you are a such a fuck boy that can neven know"
+            android:text="@string/demoText"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

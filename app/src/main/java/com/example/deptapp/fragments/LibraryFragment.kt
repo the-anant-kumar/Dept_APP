@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
@@ -62,6 +63,7 @@ class LibraryFragment : Fragment() {
                 mBooksListAdapter.differ.submitList(newsArray)
             },
             Response.ErrorListener {
+                Toast.makeText(context,"Error", Toast.LENGTH_LONG).show()
             }
         ) {
         }

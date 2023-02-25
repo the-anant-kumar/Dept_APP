@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -70,7 +71,7 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
                 mTeachersListAdapter.differ.submitList(mTeachersArray)
             },
             {
-                Log.d("Error: ", it.toString())
+                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
             }
         ){
         }

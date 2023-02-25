@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
@@ -32,13 +33,13 @@ class AcademicsFragment : Fragment() {
         return binding.root
     }
 
-    private fun fetchDataRoutine(){
+    private fun fetchDataRoutine() {
         val url = "https://ill-moth-stole.cyclic.app/api/routine/fetch"
         val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET, url, null,
             {
                 val routineJsonArray = it.getJSONArray("response")
-                for(i in 0 until routineJsonArray.length()){
+                for (i in 0 until routineJsonArray.length()) {
                     val routineJsonObject = routineJsonArray.getJSONObject(i)
                     val routine = RoutineData(
                         routineJsonObject.getString("batch"),
@@ -48,45 +49,45 @@ class AcademicsFragment : Fragment() {
                 }
 
                 binding.btnRoutinesForthYear.setOnClickListener {
-                    val pdfurl = mRoutineArray[0].pdfurl
+                    val pdfUrl = mRoutineArray[0].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
                 binding.btnRoutinesThirdYear.setOnClickListener {
-                    val pdfurl = mRoutineArray[1].pdfurl
+                    val pdfUrl = mRoutineArray[1].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
                 binding.btnRoutinesSecondYear.setOnClickListener {
-                    val pdfurl = mRoutineArray[2].pdfurl
+                    val pdfUrl = mRoutineArray[2].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
                 binding.btnRoutinesFirstYear.setOnClickListener {
-                    val pdfurl = mRoutineArray[3].pdfurl
+                    val pdfUrl = mRoutineArray[3].pdfurl
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
                 }
             },
             {
-                Log.d("Error: ", it.toString())
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
             }
-        ){
+        ) {
         }
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
 
-    private fun fetchDataSyllabus(){
+    private fun fetchDataSyllabus() {
         val url = "https://ill-moth-stole.cyclic.app/api/syllabus/fetch"
         val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET, url, null,
             {
                 val syllabusJsonArray = it.getJSONArray("response")
-                for(i in 0 until syllabusJsonArray.length()){
+                for (i in 0 until syllabusJsonArray.length()) {
                     val syllabusJsonObject = syllabusJsonArray.getJSONObject(i)
                     val syllabus = SyllabusData(
                         syllabusJsonObject.getString("batch"),
@@ -123,7 +124,7 @@ class AcademicsFragment : Fragment() {
             {
                 Log.d("Error: ", it.toString())
             }
-        ){
+        ) {
         }
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }

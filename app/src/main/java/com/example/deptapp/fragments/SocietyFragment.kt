@@ -37,7 +37,7 @@ class SocietyFragment : Fragment() {
         )
         imageList.add(
             SlideModel(
-                "https://firebasesztorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Fthree-min.JPG?alt=media&token=26feb110-4f7b-45eb-8ec2-80769de26f44",
+                "https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72",
                 "ACM Hack Track Workshop", ScaleTypes.CENTER_CROP
             )
         )
@@ -59,7 +59,7 @@ class SocietyFragment : Fragment() {
                 "Workshop", ScaleTypes.CENTER_CROP
             )
         )
-        binding.imageSlidersocietyFrag.setImageList(imageList)
+        binding.imageSliderSocietyFrag.setImageList(imageList)
 
         Glide.with(binding.root.context)
             .load("https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72")

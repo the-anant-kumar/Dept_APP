@@ -5,4 +5,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="schedule">Schedule</string>
+    <string name="demoText">Minutes of the 141th Academic Council Meeting, Chief Guest Mr Lakhan Sir.</string>
+    <string name="demoDate">17/01/2023</string>
+    <string name="collegeAdd">Since 1996\nICARE Complex, Hatiberia Haldia, Dist-Purba Medinipore, WB, Pin-721657 (+913224)252900/255166</string>
+    <string name="ACMDescription">The Association for Computing Machinery (ACM) is the world’s largest educational and scientific society uniting professionals, educators and researchers in the field of computer science to inspire dialogue, share resources and address the challenges in the domain. The purpose of this organization is to advance the scientific development, construction and application of the new machinery for computing, reasoning, and handling of information. The mission is to offer the students an opportunity to learn, innovate and grow into intellectuals, visionaries and technocrats, who contribute to promoting the advancements in science and technology. The ACM India Council is an effort of ACM aimed at improving the level of ACM activities across the country.</string>
 </resources>

@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.deptapp.R
+import com.example.deptapp.adapters.EventList2Adapter
+import com.example.deptapp.adapters.EventListAdapter
 import com.example.deptapp.adapters.NoticeListAdapter
 import com.example.deptapp.databinding.FragmentHomeBinding
 import com.google.android.material.navigation.NavigationView
@@ -29,8 +32,18 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     lateinit var imageList: ArrayList<SlideModel>
-    lateinit var noticeListAdapter: NoticeListAdapter
+    lateinit var eventListAdapter: EventList2Adapter
     var itemLists = arrayListOf(
+        "Minutes of the 140th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
+        "Minutes of the 141th Academic Council Meeting",
         "Minutes of the 141th Academic Council Meeting",
         "Minutes of the 141th Academic Council Meeting",
         "Minutes of the 141th Academic Council Meeting",
@@ -43,16 +56,13 @@ class HomeFragment : Fragment() {
         "Minutes of the 141th Academic Council Meeting"
     )
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-
-        setUpEvents()
-        setUpNoticeBoard()
+        setUpEvent()
 
         binding.btnWebsite.setOnClickListener {
             // custom browse
@@ -108,7 +118,7 @@ class HomeFragment : Fragment() {
         )
         imageList.add(
             SlideModel(
-                "https://firebasesztorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Fthree-min.JPG?alt=media&token=26feb110-4f7b-45eb-8ec2-80769de26f44",
+                "https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72",
                 "ACM Hack Track Workshop"
             )
         )
@@ -131,32 +141,16 @@ class HomeFragment : Fragment() {
             )
         )
         binding.imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
+        binding.imageSlider.textAlignment=
+
         return binding.root
     }
 
-    private fun setUpEvents() {
-        Glide.with(this)
-            .load("https://www.admissionfever.com/Media/clgimg/gallery/2092_img7281787176718769.png")
-            .into(binding.imgEvent1)
-        Glide.with(this)
-            .load("https://www.admissionfever.com/Media/clgimg/gallery/2092_img7281787176718769.png")
-            .into(binding.imgEvent2)
-        Glide.with(this)
-            .load("https://www.admissionfever.com/Media/clgimg/gallery/2092_img7281787176718769.png")
-            .into(binding.imgEvent3)
-        Glide.with(this)
-            .load("https://www.admissionfever.com/Media/clgimg/gallery/2092_img7281787176718769.png")
-            .into(binding.imgEvent4)
-        Glide.with(this)
-            .load("https://www.admissionfever.com/Media/clgimg/gallery/2092_img7281787176718769.png")
-            .into(binding.imgEvent5)
-    }
-
-
-    private fun setUpNoticeBoard() {
-        noticeListAdapter = NoticeListAdapter(itemLists)
-        binding.noticeBoard.adapter=noticeListAdapter
-        binding.noticeBoard.layoutManager=LinearLayoutManager(binding.root.context)
+    private fun setUpEvent()
+    {
+        eventListAdapter = EventList2Adapter(itemLists)
+        binding.rvEvents.adapter=eventListAdapter
+        binding.rvEvents.layoutManager= LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
     }
 
 }
