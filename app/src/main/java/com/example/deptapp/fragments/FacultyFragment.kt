@@ -1,5 +1,6 @@
 package com.example.deptapp.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -19,6 +21,7 @@ import com.example.deptapp.adapters.TeachersListAdapter
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.data.TeacherData
 import com.example.deptapp.databinding.FragmentFacultyBinding
+import com.example.deptapp.util.ConnectionManager
 import com.orhanobut.dialogplus.DialogPlus
 import com.orhanobut.dialogplus.ViewHolder
 

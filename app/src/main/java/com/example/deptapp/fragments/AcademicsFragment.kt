@@ -1,5 +1,6 @@
 package com.example.deptapp.fragments
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
@@ -15,6 +17,7 @@ import com.example.deptapp.data.MySingleton
 import com.example.deptapp.data.RoutineData
 import com.example.deptapp.data.SyllabusData
 import com.example.deptapp.databinding.FragmentAcademicsBinding
+import com.example.deptapp.util.ConnectionManager
 
 
 class AcademicsFragment : Fragment() {

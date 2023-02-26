@@ -23,6 +23,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.deptapp.fragments.*
 import com.example.deptapp.R
 import com.example.deptapp.databinding.ActivityMainBinding
+import com.example.deptapp.util.ConnectionManager
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        checkInternet()
         setupToolbar()
         openDashboard()
 
@@ -165,27 +165,6 @@ class MainActivity : AppCompatActivity() {
             binding.navigationView.checkedItem?.isChecked = false
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun checkInternet() {
-        val connectivityManager =
-            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-        if (activeNetwork?.isConnected == null) {
-            val dialog = AlertDialog.Builder(this)
-            dialog.setIcon(android.R.drawable.ic_dialog_alert)
-            dialog.setCancelable(false)
-            dialog.setTitle("No Internet Connection!")
-            dialog.setMessage("Please check your internet connection")
-            dialog.setPositiveButton("Ok") { text, listener ->
-                Handler().postDelayed({
-                    checkInternet()
-                }, 5000)
-            }
-            dialog.create()
-            dialog.show()
-
-        }
     }
 
 }

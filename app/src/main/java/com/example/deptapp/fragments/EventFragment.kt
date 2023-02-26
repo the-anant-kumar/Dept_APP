@@ -1,11 +1,13 @@
 package com.example.deptapp.fragments
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.example.deptapp.adapters.NoticeListAdapter
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.data.NoticeData
 import com.example.deptapp.databinding.FragmentEventBinding
+import com.example.deptapp.util.ConnectionManager
 
 
 class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
@@ -62,6 +65,7 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
             setUpNotice()
         }else
             setUpEvent()
+
         binding.tvEventFrag.text = name
         return binding.root
     }

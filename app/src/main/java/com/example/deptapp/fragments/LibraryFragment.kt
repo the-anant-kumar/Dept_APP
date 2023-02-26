@@ -1,11 +1,13 @@
 package com.example.deptapp.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
@@ -15,6 +17,7 @@ import com.example.deptapp.adapters.BooksListAdapter
 import com.example.deptapp.data.BookData
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.databinding.FragmentLibraryBinding
+import com.example.deptapp.util.ConnectionManager
 
 class LibraryFragment : Fragment() {
 
