@@ -13,7 +13,6 @@ import com.example.deptapp.data.TeacherData
 
 class NoticeListAdapter(private val listener: NoticeItemClicked) :
     RecyclerView.Adapter<NoticeListAdapter.NoticeBoardViewHolder>() {
-
     class NoticeBoardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val noticeTitle: TextView = view.findViewById(R.id.noticeTitle2)
         val noticeDate: TextView = view.findViewById(R.id.noticeDate2)
