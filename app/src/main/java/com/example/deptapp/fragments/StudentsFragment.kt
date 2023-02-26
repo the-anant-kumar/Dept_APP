@@ -34,12 +34,18 @@ class StudentsFragment : Fragment() {
     }
 
     private fun fetchData(){
-        binding.studentLoader.visibility = View.VISIBLE
+//        binding.studentLoader.visibility = View.VISIBLE
         val url = "https://ill-moth-stole.cyclic.app/api/student/fetch"
         val jsonObjectRequest = object : JsonObjectRequest(
-            Request.Method.GET, url, null,
+            Method.GET, url, null,
             {
-                binding.studentLoader.visibility = View.INVISIBLE
+//                binding.studentLoader.visibility = View.INVISIBLE
+                binding.shimmerStudent.stopShimmer()
+                binding.shimmerStudent.visibility = View.GONE
+                binding.cvFourthYear.visibility = View.VISIBLE
+                binding.cvThirdYear.visibility = View.VISIBLE
+                binding.cvSecondYear.visibility = View.VISIBLE
+                binding.cvFirstYear.visibility = View.VISIBLE
                 val studentsJsonArray = it.getJSONArray("response")
                 for(i in 0 until studentsJsonArray.length()){
                     val studentsJsonObject = studentsJsonArray.getJSONObject(i)
