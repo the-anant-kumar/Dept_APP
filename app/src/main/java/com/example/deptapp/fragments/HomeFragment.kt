@@ -170,7 +170,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 for(i in 0 until noticeJsonArray.length()){
                     val noticeJsonObject = noticeJsonArray.getJSONObject(i)
                     val notice = NoticeData(
-                        noticeJsonObject.getString("title"),
+                        noticeJsonObject.getString("batch"),
                         noticeJsonObject.getString("pdfurl"),
                         noticeJsonObject.getString("date"),
                         noticeJsonObject.getString("pdfid")

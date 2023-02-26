@@ -14,34 +14,38 @@
         android:fontFamily="serif"
         android:text="BATCH"
         android:textColor="@color/main_color"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/studentLoader"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:elevation="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cvFirstYear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_student"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBatch"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loader" />
+        tools:layout_editor_absoluteX="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/shimmer_students" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvFourthYear"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_margin="15dp"
-        android:layout_marginTop="15dp"
         app:cardCornerRadius="15dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/cvThirdYear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -99,6 +103,7 @@
         android:layout_height="75dp"
         android:layout_margin="15dp"
         app:cardCornerRadius="15dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cvSecondYear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
@@ -159,6 +164,7 @@
         android:layout_height="75dp"
         android:layout_margin="15dp"
         app:cardCornerRadius="15dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/cvFirstYear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -220,8 +226,10 @@
         android:layout_height="75dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginEnd="15dp"
         app:cardCornerRadius="15dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
