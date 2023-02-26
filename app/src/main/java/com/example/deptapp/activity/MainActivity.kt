@@ -1,12 +1,20 @@
 package com.example.deptapp.activity
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkInfo
+import android.net.wifi.p2p.WifiP2pManager.NetworkInfoListener
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView.AdapterContextMenuInfo
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
@@ -18,11 +26,13 @@ import com.example.deptapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        checkInternet()
         setupToolbar()
         openDashboard()
 
@@ -145,16 +155,37 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
         if (id == R.id.notification) {
-            val bundle=Bundle()
-            bundle.putString("name","NOTICE")
+            val bundle = Bundle()
+            bundle.putString("name", "NOTICE")
             val fragment = EventFragment()
-            fragment.arguments=bundle
+            fragment.arguments = bundle
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frame, fragment)
             transaction.commit()
             binding.navigationView.checkedItem?.isChecked = false
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun checkInternet() {
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        if (activeNetwork?.isConnected == null) {
+            val dialog = AlertDialog.Builder(this)
+            dialog.setIcon(android.R.drawable.ic_dialog_alert)
+            dialog.setCancelable(false)
+            dialog.setTitle("No Internet Connection!")
+            dialog.setMessage("Please check your internet connection")
+            dialog.setPositiveButton("Ok") { text, listener ->
+                Handler().postDelayed({
+                    checkInternet()
+                }, 5000)
+            }
+            dialog.create()
+            dialog.show()
+
+        }
     }
 
 }
