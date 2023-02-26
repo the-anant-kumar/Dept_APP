@@ -38,9 +38,13 @@ class AcademicsFragment : Fragment() {
         val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET, url, null,
             {
-                binding.shimmerAcademics.stopShimmer()
-                binding.shimmerAcademics.visibility = View.GONE
-                binding.layoutAcademics.visibility = View.VISIBLE
+                binding.shimmerSyllabus.stopShimmer()
+                binding.shimmerRoutines.stopShimmer()
+                binding.shimmerSyllabus.visibility = View.GONE
+                binding.shimmerRoutines.visibility=View.GONE
+                binding.layoutSyllabus.visibility = View.VISIBLE
+                binding.layoutRoutine.visibility = View.VISIBLE
+
                 val routineJsonArray = it.getJSONArray("response")
                 for (i in 0 until routineJsonArray.length()) {
                     val routineJsonObject = routineJsonArray.getJSONObject(i)
@@ -89,9 +93,13 @@ class AcademicsFragment : Fragment() {
         val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET, url, null,
             {
-                binding.shimmerAcademics.stopShimmer()
-                binding.shimmerAcademics.visibility = View.GONE
-                binding.layoutAcademics.visibility = View.VISIBLE
+                binding.shimmerSyllabus.stopShimmer()
+                binding.shimmerRoutines.stopShimmer()
+                binding.shimmerSyllabus.visibility = View.GONE
+                binding.shimmerRoutines.visibility=View.GONE
+                binding.layoutSyllabus.visibility = View.VISIBLE
+                binding.layoutRoutine.visibility = View.VISIBLE
+
                 val syllabusJsonArray = it.getJSONArray("response")
                 for (i in 0 until syllabusJsonArray.length()) {
                     val syllabusJsonObject = syllabusJsonArray.getJSONObject(i)

@@ -88,6 +88,7 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
         val jsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
             {
+                binding.eventLoader.visibility=View.INVISIBLE
                 val noticeJsonArray = it.getJSONArray("response")
                 val mNoticeArray = ArrayList<NoticeData>()
                 for(i in 0 until noticeJsonArray.length()){
