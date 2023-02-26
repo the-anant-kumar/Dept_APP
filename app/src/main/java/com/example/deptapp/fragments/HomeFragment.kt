@@ -161,6 +161,11 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         val jsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
             {
+                binding.shimmerHome.stopShimmer()
+                binding.shimmerHome.visibility = View.GONE
+                binding.layoutEvent.visibility = View.VISIBLE
+                binding.layoutNotice.visibility = View.VISIBLE
+
                 val noticeJsonArray = it.getJSONArray("response")
                 for(i in 0 until noticeJsonArray.length()){
                     val noticeJsonObject = noticeJsonArray.getJSONObject(i)

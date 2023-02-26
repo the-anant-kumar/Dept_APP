@@ -94,9 +94,26 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <include layout="@layout/shimmer_home" />
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
             <LinearLayout
+                android:id="@+id/layoutEvent"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:background="#F3F3F3"
                 android:orientation="vertical"
@@ -161,9 +178,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutNotice"
                 android:layout_width="match_parent"
                 android:layout_height="370dp"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:background="@color/background_assets"
                 android:orientation="vertical"
                 android:padding="5dp">
