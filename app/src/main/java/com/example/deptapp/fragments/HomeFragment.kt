@@ -189,7 +189,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
 
     private fun setupNoticeHome() {
         binding.noticeTitle1.text = mNoticeArray[0].noticeTitle
-        binding.noticeDate1.text = mNoticeArray[0].noticeDate
+        binding.noticeDate1.text = mNoticeArray[0].noticeDate.subSequence(0,10)
         binding.noticeClick1.setOnClickListener {
             val pdfUrl = mNoticeArray[0].pdfLink
             val builder = CustomTabsIntent.Builder()
@@ -198,7 +198,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         }
 
         binding.noticeTitle2.text = mNoticeArray[1].noticeTitle
-        binding.noticeDate2.text = mNoticeArray[1].noticeDate
+        binding.noticeDate2.text = mNoticeArray[1].noticeDate.subSequence(0,10)
         binding.noticeClick2.setOnClickListener {
             val pdfUrl = mNoticeArray[1].pdfLink
             val builder = CustomTabsIntent.Builder()
@@ -207,7 +207,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         }
 
         binding.noticeTitle3.text = mNoticeArray[2].noticeTitle
-        binding.noticeDate3.text = mNoticeArray[2].noticeDate
+        binding.noticeDate3.text = mNoticeArray[2].noticeDate.subSequence(0,10)
         binding.noticeClick3.setOnClickListener {
             val pdfUrl = mNoticeArray[2].pdfLink
             val builder = CustomTabsIntent.Builder()
@@ -216,7 +216,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         }
 
         binding.noticeTitle4.text = mNoticeArray[3].noticeTitle
-        binding.noticeDate4.text = mNoticeArray[3].noticeDate
+        binding.noticeDate4.text = mNoticeArray[3].noticeDate.subSequence(0,10)
         binding.noticeClick4.setOnClickListener {
             val pdfUrl = mNoticeArray[3].pdfLink
             val builder = CustomTabsIntent.Builder()
@@ -225,7 +225,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         }
 
         binding.noticeTitle5.text = mNoticeArray[4].noticeTitle
-        binding.noticeDate5.text = mNoticeArray[4].noticeDate
+        binding.noticeDate5.text = mNoticeArray[4].noticeDate.subSequence(0,10)
         binding.noticeClick5.setOnClickListener {
             val pdfUrl = mNoticeArray[5].pdfLink
             val builder = CustomTabsIntent.Builder()

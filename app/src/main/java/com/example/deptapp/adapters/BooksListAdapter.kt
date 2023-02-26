@@ -1,5 +1,6 @@
 package com.example.deptapp.adapters
 
+import android.net.wifi.p2p.WifiP2pManager.NetworkInfoListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import com.example.deptapp.data.TeacherData
 
 class BooksListAdapter() :
     RecyclerView.Adapter<BooksListAdapter.BooksListViewHolder>() {
+
+    var filterBooks=ArrayList<BookData>()
 
     class BooksListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bookTitle: TextView = itemView.findViewById(R.id.tvBookTitle)
@@ -41,13 +44,13 @@ class BooksListAdapter() :
 
     override fun onBindViewHolder(holder: BooksListViewHolder, position: Int) {
         val teacher = differ.currentList[position]
-        holder.bookTitle.text=teacher.bookTitle
-        holder.bookAuthor.text=teacher.bookAuthor
-        holder.bookCategory.text=teacher.bookCategory
+        holder.bookTitle.text = teacher.bookTitle
+        holder.bookAuthor.text = teacher.bookAuthor
+        holder.bookCategory.text = teacher.bookCategory
     }
 
     override fun getItemCount(): Int {
-        return   differ.currentList.size
+        return differ.currentList.size
     }
 
 }
