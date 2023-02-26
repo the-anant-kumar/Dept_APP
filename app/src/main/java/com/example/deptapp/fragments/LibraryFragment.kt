@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.deptapp.adapters.BooksListAdapter
-import com.example.deptapp.adapters.TeachersListAdapter
 import com.example.deptapp.data.BookData
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.databinding.FragmentLibraryBinding
@@ -20,17 +20,51 @@ class LibraryFragment : Fragment() {
 
     private lateinit var binding: FragmentLibraryBinding
     private lateinit var mBooksListAdapter: BooksListAdapter
+    private var booksList = ArrayList<BookData>()
+    private var filterBooks = ArrayList<BookData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding= FragmentLibraryBinding.inflate(layoutInflater, container, false)
+        binding = FragmentLibraryBinding.inflate(layoutInflater, container, false)
         fetchData()
         setupBookList()
+
+        binding.searchBook.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(msg: String): Boolean {
+                binding.tv2.visibility=View.INVISIBLE
+                filterBooks.clear()
+                filter(msg)
+                return false
+            }
+        })
         return binding.root
     }
+
+    private fun filter(text: String) {
+        if (text.isEmpty()) {
+            binding.tv2.visibility=View.VISIBLE
+            mBooksListAdapter.differ.submitList(booksList)
+            binding.rvBooks.adapter = mBooksListAdapter
+            mBooksListAdapter.notifyDataSetChanged()
+        } else {
+            for (book in booksList) {
+                if (book.bookTitle.lowercase().contains(text.lowercase())) {
+                    filterBooks.add(book)
+                }
+            }
+            mBooksListAdapter.differ.submitList(filterBooks)
+            binding.rvBooks.adapter = mBooksListAdapter
+            mBooksListAdapter.notifyDataSetChanged()
+        }
+    }
+
     private fun setupBookList() {
         mBooksListAdapter = BooksListAdapter()
         binding.rvBooks.adapter = mBooksListAdapter
@@ -38,7 +72,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun fetchData() {
-        binding.bookLoader.visibility=View.VISIBLE
+        binding.bookLoader.visibility = View.VISIBLE
         val url =
             "https://script.google.com/macros/s/AKfycbzjpnA_Ufjcc6PavY-8WimLbS95D7CwCo_owwEwzMCJVyYG9u3GEShND-hR9wKyiw-T/exec"
 
@@ -47,23 +81,24 @@ class LibraryFragment : Fragment() {
             url,
             null,
             Response.Listener {
-                binding.bookLoader.visibility=View.INVISIBLE
+                binding.bookLoader.visibility = View.INVISIBLE
 
-                val newsJsonArray = it.getJSONArray("data")
-                val newsArray = ArrayList<BookData>()
-                for (i in 1 until newsJsonArray.length()) {
-                    val newsJsonObject = newsJsonArray.getJSONObject(i)
+                val bookJsonArray = it.getJSONArray("data")
+                val booksArray = ArrayList<BookData>()
+                for (i in 1 until bookJsonArray.length()) {
+                    val bookJsonObject = bookJsonArray.getJSONObject(i)
                     val news = BookData(
-                        newsJsonObject.getString("title"),
-                        newsJsonObject.getString("author"),
-                        newsJsonObject.getString("category"),
+                        bookJsonObject.getString("title"),
+                        bookJsonObject.getString("author"),
+                        bookJsonObject.getString("category"),
                     )
-                    newsArray.add(news)
+                    booksArray.add(news)
                 }
-                mBooksListAdapter.differ.submitList(newsArray)
+                booksList = booksArray
+                mBooksListAdapter.differ.submitList(booksArray)
             },
             Response.ErrorListener {
-                Toast.makeText(context,"Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
             }
         ) {
         }

@@ -38,7 +38,7 @@ class NoticeListAdapter(private val listener: NoticeItemClicked) :
     override fun onBindViewHolder(holder: NoticeBoardViewHolder, position: Int) {
         val notice = differ.currentList[position]
         holder.noticeTitle.text = notice.noticeTitle
-        holder.noticeDate.text = notice.noticeDate
+        holder.noticeDate.text = notice.noticeDate.subSequence(0,10)
         holder.itemView.setOnClickListener {
             listener.onItemClick(notice)
         }
