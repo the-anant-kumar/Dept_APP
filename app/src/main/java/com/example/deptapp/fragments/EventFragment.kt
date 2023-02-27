@@ -126,7 +126,8 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
                         eventsJsonObject.getString("_id"),
                         eventsJsonObject.getString("title"),
                         eventsJsonObject.getJSONArray("image"),
-                        eventsJsonObject.getString("title")
+                        eventsJsonObject.getString("title"),
+                        eventsJsonObject.getString("desc")
                     )
                     mEventArray.add(events)
                 }

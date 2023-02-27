@@ -34,30 +34,6 @@ class HomeFragment : Fragment(), EventItem2Clicked {
     lateinit var mEventListAdapter: EventList2Adapter
     val mNoticeArray = ArrayList<NoticeData>()
 
-
-    var itemLists = arrayListOf(
-        "Minutes of the 140th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting"
-    )
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -181,7 +157,8 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                         eventsJsonObject.getString("_id"),
                         eventsJsonObject.getString("title"),
                         eventsJsonObject.getJSONArray("image"),
-                        eventsJsonObject.getString("title")
+                        eventsJsonObject.getString("title"),
+                        eventsJsonObject.getString("desc")
                     )
                     mEventArray.add(events)
                 }
@@ -196,7 +173,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
     }
 
     private fun setUpEvent() {
-        mEventListAdapter = EventList2Adapter(itemLists, this)
+        mEventListAdapter = EventList2Adapter(this)
         binding.rvEvents.adapter = mEventListAdapter
         binding.rvEvents.layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
@@ -294,7 +271,17 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         }
     }
 
-    override fun onItemClick(item: String) {
-        Toast.makeText(binding.root.context, item, Toast.LENGTH_SHORT).show()
+    override fun onItemClick(item: EventData) {
+        val fragment = EventDetailsFragment()
+        val bundle = Bundle()
+        bundle.putString("title", item.eventTitle)
+        bundle.putString("img1", item.eventImageUrl.getJSONObject(0)["imageurl"].toString())
+        bundle.putString("img2", item.eventImageUrl.getJSONObject(1)["imageurl"].toString())
+        bundle.putString("img3", item.eventImageUrl.getJSONObject(2)["imageurl"].toString())
+        bundle.putString("desc", item.eventDesc)
+        fragment.arguments = bundle
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame, fragment)
+        transaction.commit()
     }
 }
