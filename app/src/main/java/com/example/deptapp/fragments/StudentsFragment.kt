@@ -33,8 +33,7 @@ class StudentsFragment : Fragment() {
         return binding.root
     }
 
-    private fun fetchData(){
-//        binding.studentLoader.visibility = View.VISIBLE
+    private fun fetchData() {
         val url = "https://ill-moth-stole.cyclic.app/api/student/fetch"
         val jsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
@@ -47,7 +46,7 @@ class StudentsFragment : Fragment() {
                 binding.cvSecondYear.visibility = View.VISIBLE
                 binding.cvFirstYear.visibility = View.VISIBLE
                 val studentsJsonArray = it.getJSONArray("response")
-                for(i in 0 until studentsJsonArray.length()){
+                for (i in 0 until studentsJsonArray.length()) {
                     val studentsJsonObject = studentsJsonArray.getJSONObject(i)
                     val students = StudentData(
                         studentsJsonObject.getString("batch"),
@@ -55,42 +54,48 @@ class StudentsFragment : Fragment() {
                     )
                     mStudentsArray.add(students)
                 }
-
-                binding.tvFourthYear.text = mStudentsArray[0].batch
-                binding.tvThirdYear.text = mStudentsArray[1].batch
-                binding.tvSecondYear.text = mStudentsArray[2].batch
-                binding.tvFirstYear.text = mStudentsArray[3].batch
-                binding.btnShowFourthYear.setOnClickListener {
-                    val pdfUrl = mStudentsArray[0].pdfurl
-                    val builder = CustomTabsIntent.Builder()
-                    val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
-                }
-                binding.btnShowThirdYear.setOnClickListener {
-                    val pdfUrl = mStudentsArray[1].pdfurl
-                    val builder = CustomTabsIntent.Builder()
-                    val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
-                }
-                binding.btnShowSecondYear.setOnClickListener {
-                    val pdfUrl = mStudentsArray[2].pdfurl
-                    val builder = CustomTabsIntent.Builder()
-                    val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
-                }
-                binding.btnShowFirstYear.setOnClickListener {
-                    val pdfUrl = mStudentsArray[3].pdfurl
-                    val builder = CustomTabsIntent.Builder()
-                    val customTabsIntent = builder.build()
-                    customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
-                }
+                if(mStudentsArray.isEmpty())
+                    Toast.makeText(context,"Data not found!",Toast.LENGTH_SHORT).show()
+                else
+                    studentDataSet()
             },
             {
-                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
             }
-        ){
+        ) {
         }
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
+    }
+
+    fun studentDataSet() {
+        binding.tvFourthYear.text = mStudentsArray[0].batch
+        binding.tvThirdYear.text = mStudentsArray[1].batch
+        binding.tvSecondYear.text = mStudentsArray[2].batch
+        binding.tvFirstYear.text = mStudentsArray[3].batch
+        binding.btnShowFourthYear.setOnClickListener {
+            val pdfUrl = mStudentsArray[0].pdfurl
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
+        }
+        binding.btnShowThirdYear.setOnClickListener {
+            val pdfUrl = mStudentsArray[1].pdfurl
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
+        }
+        binding.btnShowSecondYear.setOnClickListener {
+            val pdfUrl = mStudentsArray[2].pdfurl
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
+        }
+        binding.btnShowFirstYear.setOnClickListener {
+            val pdfUrl = mStudentsArray[3].pdfurl
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
+        }
     }
 
 }

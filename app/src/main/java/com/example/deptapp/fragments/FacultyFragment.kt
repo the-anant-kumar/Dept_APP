@@ -49,7 +49,7 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
         binding.rvTeacher.layoutManager = LinearLayoutManager(binding.root.context)
     }
 
-    private fun fetchData(){
+    private fun fetchData() {
         binding.teacherLoader.visibility = View.VISIBLE
         val url = "https://ill-moth-stole.cyclic.app/api/teacher/fetch"
         val jsonObjectRequest = object : JsonObjectRequest(
@@ -58,7 +58,7 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
                 binding.teacherLoader.visibility = View.INVISIBLE
                 val teachersJsonArray = it.getJSONArray("tres")
                 val mTeachersArray = ArrayList<TeacherData>()
-                for(i in 0 until teachersJsonArray.length()){
+                for (i in 0 until teachersJsonArray.length()) {
                     val teachersJsonObject = teachersJsonArray.getJSONObject(i)
                     val teachers = TeacherData(
                         teachersJsonObject.getString("name"),
@@ -71,19 +71,23 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
                     )
                     mTeachersArray.add(teachers)
                 }
-                mTeachersListAdapter.differ.submitList(mTeachersArray)
+                if (mTeachersArray.isEmpty())
+                    Toast.makeText(context, "Data not found!", Toast.LENGTH_SHORT).show()
+                else
+                    mTeachersListAdapter.differ.submitList(mTeachersArray)
             },
             {
-                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
             }
-        ){
+        ) {
         }
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
 
     private fun TeacherPopup(item: TeacherData) {
-        dialogPlus = DialogPlus.newDialog(binding.root.context).setContentHolder(ViewHolder(R.layout.teacher_popup))
-            .setExpanded(true,1000)
+        dialogPlus = DialogPlus.newDialog(context)
+            .setContentHolder(ViewHolder(R.layout.teacher_popup))
+            .setExpanded(true, 1000)
             .setCancelable(true)
             .create()
         dialogPlus.show()
@@ -109,6 +113,6 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
     }
 
     override fun onItemClick(item: TeacherData) {
-       TeacherPopup(item)
+        TeacherPopup(item)
     }
 }

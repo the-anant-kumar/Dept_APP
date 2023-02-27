@@ -66,7 +66,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://hithaldia.ac.in/"))
         }
 
-        binding.btnFaculity.setOnClickListener {
+        binding.btnFaculty.setOnClickListener {
             val fragment = FacultyFragment()
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frame, fragment)
