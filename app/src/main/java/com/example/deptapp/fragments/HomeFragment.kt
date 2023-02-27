@@ -3,7 +3,6 @@ package com.example.deptapp.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,42 +20,19 @@ import com.example.deptapp.data.MySingleton
 import com.example.deptapp.data.NoticeData
 
 import com.example.deptapp.adapters.*
+import com.example.deptapp.data.EventData
 
 import com.example.deptapp.databinding.FragmentHomeBinding
 import com.example.deptapp.util.ConnectionManager
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.*
+import java.lang.Integer.min
 
 
 class HomeFragment : Fragment(), EventItem2Clicked {
     lateinit var binding: FragmentHomeBinding
     lateinit var imageList: ArrayList<SlideModel>
-    lateinit var eventListAdapter: EventList2Adapter
+    lateinit var mEventListAdapter: EventList2Adapter
     val mNoticeArray = ArrayList<NoticeData>()
-
-
-    var itemLists = arrayListOf(
-        "Minutes of the 140th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting"
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +42,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
         fetchNoticeData()
+        fetchEventData()
         setUpEvent()
 
         if (!ConnectionManager().checkInternet(activity as Context)) {
@@ -167,9 +144,37 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         return binding.root
     }
 
+    private fun fetchEventData(){
+        val url = "https://ill-moth-stole.cyclic.app/api/event/fetch"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            {
+                val eventJsonArray = it.getJSONArray("response")
+                val mEventArray = ArrayList<EventData>()
+                for(i in 0 until min(5, eventJsonArray.length())){
+                    val eventsJsonObject = eventJsonArray.getJSONObject(i)
+                    val events = EventData(
+                        eventsJsonObject.getString("_id"),
+                        eventsJsonObject.getString("title"),
+                        eventsJsonObject.getJSONArray("image"),
+                        eventsJsonObject.getString("title"),
+                        eventsJsonObject.getString("desc")
+                    )
+                    mEventArray.add(events)
+                }
+                mEventListAdapter.differ.submitList(mEventArray)
+            },
+            {
+                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
+            }
+        ){
+        }
+        MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
+    }
+
     private fun setUpEvent() {
-        eventListAdapter = EventList2Adapter(itemLists, this)
-        binding.rvEvents.adapter = eventListAdapter
+        mEventListAdapter = EventList2Adapter(this)
+        binding.rvEvents.adapter = mEventListAdapter
         binding.rvEvents.layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
     }
@@ -266,7 +271,17 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         }
     }
 
-    override fun onItemClick(item: String) {
-        Toast.makeText(binding.root.context, item, Toast.LENGTH_SHORT).show()
+    override fun onItemClick(item: EventData) {
+        val fragment = EventDetailsFragment()
+        val bundle = Bundle()
+        bundle.putString("title", item.eventTitle)
+        bundle.putString("img1", item.eventImageUrl.getJSONObject(0)["imageurl"].toString())
+        bundle.putString("img2", item.eventImageUrl.getJSONObject(1)["imageurl"].toString())
+        bundle.putString("img3", item.eventImageUrl.getJSONObject(2)["imageurl"].toString())
+        bundle.putString("desc", item.eventDesc)
+        fragment.arguments = bundle
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame, fragment)
+        transaction.commit()
     }
 }

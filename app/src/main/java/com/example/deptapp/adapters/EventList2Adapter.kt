@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.deptapp.R
@@ -12,7 +14,6 @@ import com.example.deptapp.data.EventData
 import com.example.deptapp.data.TeacherData
 
 class EventList2Adapter(
-    private val items: ArrayList<String>,
     private val listener: EventItem2Clicked
 ) : RecyclerView.Adapter<EventList2Adapter.EventViewHolder>() {
 
@@ -22,6 +23,18 @@ class EventList2Adapter(
         val eventImage: ImageView = view.findViewById(R.id.imgEvent)
     }
 
+    private val differCallback = object : DiffUtil.ItemCallback<EventData>() {
+        override fun areItemsTheSame(oldItem: EventData, newItem: EventData): Boolean {
+            return oldItem.eventID == newItem.eventID
+        }
+
+        override fun areContentsTheSame(oldItem: EventData, newItem: EventData): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event2, parent, false)
         return EventViewHolder(view)
@@ -29,19 +42,25 @@ class EventList2Adapter(
 
 
     override fun getItemCount(): Int {
-        return items.size
+        return differ.currentList.size
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+        val event = differ.currentList[position]
+        val imageUrl = event.eventImageUrl.getJSONObject(0)["imageurl"]
+
         Glide.with(holder.itemView)
-            .load("https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72")
+            .load(imageUrl)
             .into(holder.eventImage)
+        holder.eventTitle.text = event.eventTitle
+        holder.eventDate.text = event.eventTime
+
         holder.itemView.setOnClickListener {
-            listener.onItemClick(items[position])
+            listener.onItemClick(event)
         }
     }
 }
 
 interface EventItem2Clicked {
-    fun onItemClick(item: String)
+    fun onItemClick(item: EventData)
 }
