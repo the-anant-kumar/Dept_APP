@@ -10,6 +10,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.toolbox.JsonObjectRequest
+import com.example.deptapp.R
 import com.example.deptapp.adapters.EventItemClicked
 import com.example.deptapp.adapters.EventListAdapter
 import com.example.deptapp.adapters.NoticeItemClicked
@@ -26,28 +27,7 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
     lateinit var mEventListAdapter: EventListAdapter
 //    lateinit var mNoticeArray: ArrayList<NoticeData>
 
-    var itemLists = arrayListOf(
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting",
-        "Minutes of the 141th Academic Council Meeting"
-    )
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,7 +59,7 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
     private fun setUpEvent() {
         binding.rvNotice.visibility=View.GONE
         binding.rvEvent.visibility=View.VISIBLE
-        mEventListAdapter = EventListAdapter(itemLists,this)
+        mEventListAdapter = EventListAdapter(this)
         binding.rvEvent.adapter=mEventListAdapter
         binding.rvEvent.layoutManager= LinearLayoutManager(binding.root.context)
     }
@@ -148,7 +128,17 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
         customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
     }
 
-    override fun onItemClick(item: String) {
-        Toast.makeText(binding.root.context,item,Toast.LENGTH_SHORT).show()
+    override fun onItemClick(item: EventData) {
+        val fragment = EventDetailsFragment()
+        val bundle = Bundle()
+        bundle.putString("title", item.eventTitle)
+        bundle.putString("img1", item.eventImageUrl.getJSONObject(0)["imageurl"].toString())
+        bundle.putString("img2", item.eventImageUrl.getJSONObject(1)["imageurl"].toString())
+        bundle.putString("img3", item.eventImageUrl.getJSONObject(2)["imageurl"].toString())
+        bundle.putString("desc", item.eventDesc)
+        fragment.arguments = bundle
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame, fragment)
+        transaction.commit()
     }
 }

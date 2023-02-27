@@ -16,7 +16,6 @@ import com.example.deptapp.data.EventData
 import com.example.deptapp.data.TeacherData
 
 class EventListAdapter(
-    private val items: ArrayList<String>,
     private val listener: EventItemClicked
 ) : RecyclerView.Adapter<EventListAdapter.EventViewHolder>() {
 
@@ -54,7 +53,7 @@ class EventListAdapter(
         holder.eventDate.text = event.eventTime
 
         holder.itemView.setOnClickListener {
-            listener.onItemClick(items[position])
+            listener.onItemClick(event)
         }
     }
 
@@ -64,5 +63,5 @@ class EventListAdapter(
 }
 
 interface EventItemClicked {
-    fun onItemClick(item: String)
+    fun onItemClick(item: EventData)
 }
