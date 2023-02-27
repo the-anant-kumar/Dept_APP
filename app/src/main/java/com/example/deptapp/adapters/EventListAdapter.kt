@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.deptapp.R
+import com.example.deptapp.data.BookData
+import com.example.deptapp.data.EventData
 import com.example.deptapp.data.TeacherData
 
 class EventListAdapter(
@@ -22,23 +26,40 @@ class EventListAdapter(
         val eventImage: ImageView = view.findViewById(R.id.imageEvent)
     }
 
+    private val differCallback = object : DiffUtil.ItemCallback<EventData>() {
+        override fun areItemsTheSame(oldItem: EventData, newItem: EventData): Boolean {
+            return oldItem.eventID == newItem.eventID
+        }
+
+        override fun areContentsTheSame(oldItem: EventData, newItem: EventData): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
         return EventViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+        val event = differ.currentList[position]
+        val imageUrl = event.eventImageUrl.getJSONObject(0)["imageurl"]
+
         Glide.with(holder.itemView)
-            .load("https://firebasestorage.googleapis.com/v0/b/social-media-2-0.appspot.com/o/images%2Ffour-min.JPG?alt=media&token=ad0aace8-0686-4ef8-8852-6e3fb4867c72")
+            .load(imageUrl)
             .into(holder.eventImage)
-        holder.eventTitle.text = items[position]
+        holder.eventTitle.text = event.eventTitle
+        holder.eventDate.text = event.eventTime
+
         holder.itemView.setOnClickListener {
             listener.onItemClick(items[position])
         }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return differ.currentList.size
     }
 }
 

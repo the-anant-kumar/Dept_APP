@@ -1,13 +1,11 @@
 package com.example.deptapp.fragments
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,16 +14,16 @@ import com.example.deptapp.adapters.EventItemClicked
 import com.example.deptapp.adapters.EventListAdapter
 import com.example.deptapp.adapters.NoticeItemClicked
 import com.example.deptapp.adapters.NoticeListAdapter
+import com.example.deptapp.data.EventData
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.data.NoticeData
 import com.example.deptapp.databinding.FragmentEventBinding
-import com.example.deptapp.util.ConnectionManager
 
 
 class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
     lateinit var binding: FragmentEventBinding
     lateinit var noticeListAdapter: NoticeListAdapter
-    lateinit var eventListAdapter: EventListAdapter
+    lateinit var mEventListAdapter: EventListAdapter
 //    lateinit var mNoticeArray: ArrayList<NoticeData>
 
     var itemLists = arrayListOf(
@@ -63,9 +61,10 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
         if(name=="NOTICE") {
             fetchNoticeData()
             setUpNotice()
-        }else
+        }else {
+            fetchEventData()
             setUpEvent()
-
+        }
         binding.tvEventFrag.text = name
         return binding.root
     }
@@ -77,12 +76,11 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
         binding.rvNotice.adapter=noticeListAdapter
         binding.rvNotice.layoutManager= LinearLayoutManager(binding.root.context)
     }
-    private fun setUpEvent()
-    {
+    private fun setUpEvent() {
         binding.rvNotice.visibility=View.GONE
         binding.rvEvent.visibility=View.VISIBLE
-        eventListAdapter = EventListAdapter(itemLists,this)
-        binding.rvEvent.adapter=eventListAdapter
+        mEventListAdapter = EventListAdapter(itemLists,this)
+        binding.rvEvent.adapter=mEventListAdapter
         binding.rvEvent.layoutManager= LinearLayoutManager(binding.root.context)
     }
 
@@ -105,6 +103,34 @@ class EventFragment : Fragment(), NoticeItemClicked,EventItemClicked {
                     mNoticeArray.add(notice)
                 }
                 noticeListAdapter.differ.submitList(mNoticeArray)
+            },
+            {
+                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
+            }
+        ){
+        }
+        MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
+    }
+    private fun fetchEventData(){
+        binding.eventLoader.visibility = View.VISIBLE
+        val url = "https://ill-moth-stole.cyclic.app/api/event/fetch"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            {
+                binding.eventLoader.visibility = View.INVISIBLE
+                val eventJsonArray = it.getJSONArray("response")
+                val mEventArray = ArrayList<EventData>()
+                for(i in 0 until eventJsonArray.length()){
+                    val eventsJsonObject = eventJsonArray.getJSONObject(i)
+                    val events = EventData(
+                        eventsJsonObject.getString("_id"),
+                        eventsJsonObject.getString("title"),
+                        eventsJsonObject.getJSONArray("image"),
+                        eventsJsonObject.getString("title")
+                    )
+                    mEventArray.add(events)
+                }
+                mEventListAdapter.differ.submitList(mEventArray)
             },
             {
                 Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
