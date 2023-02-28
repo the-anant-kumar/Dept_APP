@@ -38,12 +38,22 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
         fetchNoticeData()
         fetchEventData()
-        setUpEvent()
+        setSwipeImage()
+        handleButtonClick()
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.shimmerHome.visibility = View.VISIBLE
+            binding.shimmerHome.startShimmer()
+            binding.layoutEvent.visibility = View.GONE
+            binding.layoutNotice.visibility = View.GONE
+            fetchEventData()
+            fetchNoticeData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
 
         if (!ConnectionManager().checkInternet(activity as Context)) {
             val dialog = AlertDialog.Builder(activity as Context)
@@ -59,6 +69,13 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             dialog.show()
         }
 
+
+        binding.marqueeText.isSelected = true
+
+        return binding.root
+    }
+
+    private fun handleButtonClick() {
         binding.btnWebsite.setOnClickListener {
             // custom browse
             val builder = CustomTabsIntent.Builder()
@@ -107,7 +124,9 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             requireActivity().findViewById<NavigationView>(R.id.navigationView).checkedItem?.isChecked =
                 false
         }
-        binding.marqueeText.isSelected = true
+    }
+
+    private fun setSwipeImage() {
         imageList = ArrayList()
 
         imageList.add(
@@ -141,17 +160,22 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             )
         )
         binding.imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
-        return binding.root
     }
 
-    private fun fetchEventData(){
+    private fun fetchEventData() {
+        mEventListAdapter = EventList2Adapter(this)
         val url = "https://ill-moth-stole.cyclic.app/api/event/fetch"
         val jsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
             {
+                binding.shimmerHome.stopShimmer()
+                binding.shimmerHome.visibility = View.GONE
+                binding.layoutEvent.visibility = View.VISIBLE
+                binding.layoutNotice.visibility = View.VISIBLE
+
                 val eventJsonArray = it.getJSONArray("response")
                 val mEventArray = ArrayList<EventData>()
-                for(i in 0 until min(5, eventJsonArray.length())){
+                for (i in 0 until min(5, eventJsonArray.length())) {
                     val eventsJsonObject = eventJsonArray.getJSONObject(i)
                     val events = EventData(
                         eventsJsonObject.getString("_id"),
@@ -163,17 +187,17 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                     mEventArray.add(events)
                 }
                 mEventListAdapter.differ.submitList(mEventArray)
+                setUpEvent()
             },
             {
-                Toast.makeText(context,"Error",Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
             }
-        ){
+        ) {
         }
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
 
     private fun setUpEvent() {
-        mEventListAdapter = EventList2Adapter(this)
         binding.rvEvents.adapter = mEventListAdapter
         binding.rvEvents.layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
@@ -213,8 +237,10 @@ class HomeFragment : Fragment(), EventItem2Clicked {
     private fun setupNoticeHome() {
 
         val noticeCount = mNoticeArray.size
+        if (noticeCount == 0)
+            Toast.makeText(binding.root.context, "Data not found!", Toast.LENGTH_SHORT).show()
 
-        if(noticeCount >= 1) {
+        if (noticeCount >= 1) {
             binding.clNotice1.visibility = View.VISIBLE
             binding.noticeTitle1.text = mNoticeArray[0].noticeTitle
             binding.noticeDate1.text = mNoticeArray[0].noticeDate.subSequence(0, 10)
@@ -225,7 +251,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
             }
         }
-        if(noticeCount >= 2) {
+        if (noticeCount >= 2) {
             binding.clNotice2.visibility = View.VISIBLE
             binding.noticeTitle2.text = mNoticeArray[1].noticeTitle
             binding.noticeDate2.text = mNoticeArray[1].noticeDate.subSequence(0, 10)
@@ -236,7 +262,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
             }
         }
-        if(noticeCount >= 3) {
+        if (noticeCount >= 3) {
             binding.clNotice3.visibility = View.VISIBLE
             binding.noticeTitle3.text = mNoticeArray[2].noticeTitle
             binding.noticeDate3.text = mNoticeArray[2].noticeDate.subSequence(0, 10)
@@ -247,7 +273,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
             }
         }
-        if(noticeCount >= 4) {
+        if (noticeCount >= 4) {
             binding.clNotice4.visibility = View.VISIBLE
             binding.noticeTitle4.text = mNoticeArray[3].noticeTitle
             binding.noticeDate4.text = mNoticeArray[3].noticeDate.subSequence(0, 10)
@@ -258,7 +284,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
             }
         }
-        if(noticeCount >= 5){
+        if (noticeCount >= 5) {
             binding.clNotice5.visibility = View.VISIBLE
             binding.noticeTitle5.text = mNoticeArray[4].noticeTitle
             binding.noticeDate5.text = mNoticeArray[4].noticeDate.subSequence(0, 10)
