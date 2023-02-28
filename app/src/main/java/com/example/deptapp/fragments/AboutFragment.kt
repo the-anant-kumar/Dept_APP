@@ -9,12 +9,6 @@ import com.bumptech.glide.Glide
 import com.example.deptapp.R
 import com.example.deptapp.databinding.FragmentAboutBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class AboutFragment : Fragment() {
 
     lateinit var binding : FragmentAboutBinding
@@ -22,7 +16,7 @@ class AboutFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding= FragmentAboutBinding.inflate(layoutInflater, container, false)
 
