@@ -1,20 +1,16 @@
 package com.example.deptapp.adapters
 
-import android.net.wifi.p2p.WifiP2pManager.NetworkInfoListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.deptapp.R
 import com.example.deptapp.data.BookData
-import com.example.deptapp.data.TeacherData
 
-class BooksListAdapter() :
+class BooksListAdapter :
     RecyclerView.Adapter<BooksListAdapter.BooksListViewHolder>() {
 
     var filterBooks=ArrayList<BookData>()

@@ -6,11 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.deptapp.R
 import com.example.deptapp.adapters.CompanyAdapter
+import com.example.deptapp.data.MySingleton
+import com.example.deptapp.data.NoticeData
+import com.example.deptapp.data.PlacementData
 import com.example.deptapp.databinding.FragmentPlacementBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -19,13 +24,14 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import me.relex.circleindicator.CircleIndicator2
 
 
 class PlacementFragment : Fragment() {
 
     private lateinit var binding: FragmentPlacementBinding
     private lateinit var pieChart: PieChart
+    private val mPlacementArray = ArrayList<PlacementData>()
+
     var companyList= arrayListOf(
         "https://1000logos.net/wp-content/uploads/2020/05/Wipro-logo.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/603px-Amazon_logo.svg.png","https://1000logos.net/wp-content/uploads/2021/04/Accenture-logo.png","https://www.capgemini.com/wp-content/uploads/2022/05/Capgemini.gif",
         "https://upload.wikimedia.org/wikipedia/commons/1/15/Deloitte_Logo.png","https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/2560px-Tata_Consultancy_Services_Logo.svg.png",
@@ -42,10 +48,38 @@ class PlacementFragment : Fragment() {
         binding = FragmentPlacementBinding.inflate(layoutInflater, container, false)
 
         pieChart = binding.placementPieChart
+
+
         setupPieChart()
-        loadPieChartData()
+        fetchNoticeData()
+
         loadCompany()
+
         return binding.root
+    }
+
+    private fun fetchNoticeData(){
+        val url = "https://ill-moth-stole.cyclic.app/api/placement/year"
+        val jsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            {
+                val placementJsonArray = it.getJSONArray("response")
+//                for(i in 0 until placementJsonArray.length()){
+                    val placementJsonObject = placementJsonArray.getJSONObject(0)
+                    val placement = PlacementData(
+                        placementJsonObject.getString("year"),
+                        placementJsonObject.getJSONArray("records")
+                    )
+                    mPlacementArray.add(placement)
+//                }
+                loadPieChartData()
+            },
+            {
+                Toast.makeText(context,"Error", Toast.LENGTH_LONG).show()
+            }
+        ){
+        }
+        MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
 
     private fun loadCompany() {
@@ -62,7 +96,6 @@ class PlacementFragment : Fragment() {
         pieChart.setUsePercentValues(true)
         pieChart.setEntryLabelTextSize(12f)
         pieChart.setEntryLabelColor(Color.BLACK)
-        pieChart.centerText = "BATCH\n2018-2022"
         val r = resources.getFont(R.font.serif)
         pieChart.setCenterTextTypeface(r)
         pieChart.setCenterTextColor(Color.parseColor("#4E5180"))
@@ -72,18 +105,36 @@ class PlacementFragment : Fragment() {
 
         val l = pieChart.legend
         l.isEnabled = false
+
     }
 
     private fun loadPieChartData() {
 
+        pieChart.centerText = "BATCH\n${mPlacementArray[0].year}"
         val entries: ArrayList<PieEntry> = ArrayList()
+        val count = ArrayList<Pair<Float,String>>()
+        var totalCount = 0f
+        for(i in 0 until mPlacementArray[0].placementRecord.length()) {
+            val cnt = mPlacementArray[0].placementRecord.getJSONObject(i)["count"].toString()
+            count.add(Pair(cnt.toFloat(), mPlacementArray[0].placementRecord.getJSONObject(i)["company"].toString()))
+            totalCount += cnt.toFloat()
+        }
+        count.sortByDescending { it.first }
 
-        entries.add(PieEntry(0.1f, "Assenture"))
-        entries.add(PieEntry(0.15f, "TCS"))
-        entries.add(PieEntry(0.10f, "Infosys"))
-        entries.add(PieEntry(0.25f, "Wipro"))
-        entries.add(PieEntry(0.2f, "Capgimini"))
-        entries.add(PieEntry(0.2f, "Others"))
+
+        val comp1 = count[0].first / totalCount
+        val comp2 = count[1].first / totalCount
+        val comp3 = count[2].first / totalCount
+        val comp4 = count[3].first / totalCount
+        val comp5 = count[4].first / totalCount
+        val other = (totalCount - (comp1+comp2+comp3+comp4+comp5)) / totalCount
+
+        entries.add(PieEntry(comp1, count[0].second))
+        entries.add(PieEntry(comp2, count[1].second))
+        entries.add(PieEntry(comp3, count[2].second))
+        entries.add(PieEntry(comp4, count[3].second))
+        entries.add(PieEntry(comp5, count[4].second))
+        entries.add(PieEntry(other, "Others"))
 
         val colors: ArrayList<Int> = ArrayList()
         for (color in ColorTemplate.MATERIAL_COLORS) {

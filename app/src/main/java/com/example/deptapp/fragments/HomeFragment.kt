@@ -289,7 +289,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             binding.noticeTitle5.text = mNoticeArray[4].noticeTitle
             binding.noticeDate5.text = mNoticeArray[4].noticeDate.subSequence(0, 10)
             binding.noticeClick5.setOnClickListener {
-                val pdfUrl = mNoticeArray[5].pdfLink
+                val pdfUrl = mNoticeArray[4].pdfLink
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
                 customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))

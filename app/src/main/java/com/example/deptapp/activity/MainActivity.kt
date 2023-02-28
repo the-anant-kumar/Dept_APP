@@ -1,29 +1,14 @@
 package com.example.deptapp.activity
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkInfo
-import android.net.wifi.p2p.WifiP2pManager.NetworkInfoListener
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.AdapterView.AdapterContextMenuInfo
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
-import androidx.core.view.isVisible
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.deptapp.fragments.*
 import com.example.deptapp.R
 import com.example.deptapp.databinding.ActivityMainBinding
-import com.example.deptapp.util.ConnectionManager
+import com.example.deptapp.fragments.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
