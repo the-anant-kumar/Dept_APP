@@ -37,7 +37,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
-            android:maxLines="3"
+            android:maxLines="2"
             android:text="@string/demoText"
             android:textColor="@color/black"
             android:textSize="16sp"

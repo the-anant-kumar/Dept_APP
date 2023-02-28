@@ -58,7 +58,7 @@ class AcademicsFragment : Fragment() {
                     mRoutineArray.add(routine)
                 }
                 if(mSyllabusArray.isEmpty())
-                    Toast.makeText(activity as Context,"Data not found!",Toast.LENGTH_SHORT).show()
+                    fetchDataRoutine()
                 else
                     setDataRoutine()
 
@@ -109,25 +109,25 @@ class AcademicsFragment : Fragment() {
 
     private fun setDataRoutine() {
         binding.btnRoutinesForthYear.setOnClickListener {
-            val pdfUrl = mRoutineArray[0].pdfurl
+            val pdfUrl = mRoutineArray[3].pdfurl
             val builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
         }
         binding.btnRoutinesThirdYear.setOnClickListener {
-            val pdfUrl = mRoutineArray[1].pdfurl
-            val builder = CustomTabsIntent.Builder()
-            val customTabsIntent = builder.build()
-            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
-        }
-        binding.btnRoutinesSecondYear.setOnClickListener {
             val pdfUrl = mRoutineArray[2].pdfurl
             val builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
         }
+        binding.btnRoutinesSecondYear.setOnClickListener {
+            val pdfUrl = mRoutineArray[1].pdfurl
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
+        }
         binding.btnRoutinesFirstYear.setOnClickListener {
-            val pdfUrl = mRoutineArray[3].pdfurl
+            val pdfUrl = mRoutineArray[0].pdfurl
             val builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfUrl))
@@ -136,25 +136,25 @@ class AcademicsFragment : Fragment() {
 
     private fun setDataSyllabus(){
         binding.btnSyllabusFourthYear.setOnClickListener {
-            val pdfurl = mSyllabusArray[0].pdfurl
+            val pdfurl = mSyllabusArray[3].pdfurl
             val builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
         }
         binding.btnSyllabusThirdYear.setOnClickListener {
-            val pdfurl = mSyllabusArray[1].pdfurl
-            val builder = CustomTabsIntent.Builder()
-            val customTabsIntent = builder.build()
-            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
-        }
-        binding.btnSyllabusSecondYear.setOnClickListener {
             val pdfurl = mSyllabusArray[2].pdfurl
             val builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
         }
+        binding.btnSyllabusSecondYear.setOnClickListener {
+            val pdfurl = mSyllabusArray[1].pdfurl
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))
+        }
         binding.btnSyllabusFirstYear.setOnClickListener {
-            val pdfurl = mSyllabusArray[3].pdfurl
+            val pdfurl = mSyllabusArray[0].pdfurl
             val builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(binding.root.context, Uri.parse(pdfurl))

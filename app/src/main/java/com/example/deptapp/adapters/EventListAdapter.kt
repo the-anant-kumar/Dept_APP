@@ -50,7 +50,7 @@ class EventListAdapter(
             .load(imageUrl)
             .into(holder.eventImage)
         holder.eventTitle.text = event.eventTitle
-        holder.eventDate.text = event.eventTime
+        holder.eventDate.text = event.eventTime.subSequence(0,10)
 
         holder.itemView.setOnClickListener {
             listener.onItemClick(event)

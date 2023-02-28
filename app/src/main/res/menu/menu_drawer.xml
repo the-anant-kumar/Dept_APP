@@ -38,10 +38,6 @@
             android:title="Placement" />
 
         <item
-            android:id="@+id/alumni"
-            android:icon="@drawable/ic_alumini"
-            android:title="Alumni" />
-        <item
             android:id="@+id/society"
             android:icon="@drawable/ic_society"
             android:title="Society" />

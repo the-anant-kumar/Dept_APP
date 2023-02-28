@@ -50,6 +50,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             binding.shimmerHome.startShimmer()
             binding.layoutEvent.visibility = View.GONE
             binding.layoutNotice.visibility = View.GONE
+            mNoticeArray.clear()
             fetchEventData()
             fetchNoticeData()
             binding.swipeRefreshLayout.isRefreshing = false
@@ -181,7 +182,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                         eventsJsonObject.getString("_id"),
                         eventsJsonObject.getString("title"),
                         eventsJsonObject.getJSONArray("image"),
-                        eventsJsonObject.getString("title"),
+                        eventsJsonObject.getString("date"),
                         eventsJsonObject.getString("desc")
                     )
                     mEventArray.add(events)
@@ -190,7 +191,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 setUpEvent()
             },
             {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Error Event", Toast.LENGTH_LONG).show()
             }
         ) {
         }
@@ -227,7 +228,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 setupNoticeHome()
             },
             {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Error Notice", Toast.LENGTH_LONG).show()
             }
         ) {
         }

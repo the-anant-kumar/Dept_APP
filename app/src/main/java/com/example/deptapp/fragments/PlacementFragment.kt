@@ -127,13 +127,15 @@ class PlacementFragment : Fragment() {
         val comp3 = count[2].first / totalCount
         val comp4 = count[3].first / totalCount
         val comp5 = count[4].first / totalCount
-        val other = (totalCount - (comp1+comp2+comp3+comp4+comp5)) / totalCount
+        val comp6 = count[5].first / totalCount
+        val other = (1- (comp1+comp2+comp3+comp4+comp5+comp6))
 
         entries.add(PieEntry(comp1, count[0].second))
         entries.add(PieEntry(comp2, count[1].second))
         entries.add(PieEntry(comp3, count[2].second))
         entries.add(PieEntry(comp4, count[3].second))
         entries.add(PieEntry(comp5, count[4].second))
+        entries.add(PieEntry(comp6, count[5].second))
         entries.add(PieEntry(other, "Others"))
 
         val colors: ArrayList<Int> = ArrayList()

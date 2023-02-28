@@ -77,12 +77,6 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     binding.drawerLayout.closeDrawers()
                 }
-                R.id.alumni -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame, AlumniFragment())
-                        .commit()
-                    binding.drawerLayout.closeDrawers()
-                }
                 R.id.society -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frame, SocietyFragment())
