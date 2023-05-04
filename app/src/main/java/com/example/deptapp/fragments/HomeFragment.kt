@@ -3,6 +3,7 @@ package com.example.deptapp.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -191,6 +192,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 setUpEvent()
             },
             {
+                Log.d("HOMEFRAGMENT", it.message.toString())
                 Toast.makeText(context, "Error Event", Toast.LENGTH_LONG).show()
             }
         ) {
@@ -228,6 +230,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 setupNoticeHome()
             },
             {
+                Log.d("HOMEFRAGMENT", it.message.toString())
                 Toast.makeText(context, "Error Notice", Toast.LENGTH_LONG).show()
             }
         ) {
