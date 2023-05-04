@@ -2,6 +2,7 @@ package com.example.deptapp.fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ class SocietyFragment : Fragment() {
     private lateinit var binding: FragmentSocietyBinding
     private lateinit var imageList: ArrayList<SlideModel>
     private val mEventArray = ArrayList<EventData>()
+    val TAG = "SOCIETY FRAGMENT"
 
 
     override fun onCreateView(
@@ -112,7 +114,8 @@ class SocietyFragment : Fragment() {
                 setupEventSociety()
             },
             {
-                Toast.makeText(context,"Error", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context,"Error", Toast.LENGTH_LONG).show()
+                Log.d(TAG, "Error")
             }
         ){
         }

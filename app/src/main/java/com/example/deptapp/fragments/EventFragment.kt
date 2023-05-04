@@ -2,6 +2,7 @@ package com.example.deptapp.fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class EventFragment : Fragment(), NoticeItemClicked, EventItemClicked {
     lateinit var binding: FragmentEventBinding
     lateinit var noticeListAdapter: NoticeListAdapter
     lateinit var mEventListAdapter: EventListAdapter
+    val TAG = "EVENT FRAGMENT"
 
 
     override fun onCreateView(
@@ -90,14 +92,13 @@ class EventFragment : Fragment(), NoticeItemClicked, EventItemClicked {
                 )
                 mNoticeArray.add(notice)
             }
-            if (mNoticeArray.isEmpty()) Toast.makeText(
-                binding.root.context,
-                "No data found!",
-                Toast.LENGTH_SHORT
-            ).show()
-            else noticeListAdapter.differ.submitList(mNoticeArray)
+            if (mNoticeArray.isEmpty()) {
+//                Toast.makeText(binding.root.context, "No data found!", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "No data found")
+            }else noticeListAdapter.differ.submitList(mNoticeArray)
         }, {
-            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+            Log.d(TAG, it.message.toString())
         }) {}
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
@@ -119,12 +120,14 @@ class EventFragment : Fragment(), NoticeItemClicked, EventItemClicked {
                 )
                 mEventArray.add(events)
             }
-            if (mEventArray.isEmpty())
-                Toast.makeText(binding.root.context, "No data found!", Toast.LENGTH_SHORT).show()
-            else
+            if (mEventArray.isEmpty()) {
+//                Toast.makeText(binding.root.context, "No data found!", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "No data found")
+            }else
                 mEventListAdapter.differ.submitList(mEventArray)
         }, {
-            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+            Log.d(TAG, it.message.toString())
         }) {}
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }

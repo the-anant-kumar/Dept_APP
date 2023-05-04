@@ -3,6 +3,7 @@ package com.example.deptapp.fragments
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class PlacementFragment : Fragment() {
     private lateinit var binding: FragmentPlacementBinding
     private lateinit var pieChart: PieChart
     private val mPlacementArray = ArrayList<PlacementData>()
+    val TAG = "PLACEMENT FRAGMENT"
 
     var companyList= arrayListOf(
         "https://1000logos.net/wp-content/uploads/2020/05/Wipro-logo.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/603px-Amazon_logo.svg.png","https://1000logos.net/wp-content/uploads/2021/04/Accenture-logo.png","https://www.capgemini.com/wp-content/uploads/2022/05/Capgemini.gif",
@@ -75,7 +77,8 @@ class PlacementFragment : Fragment() {
                 loadPieChartData()
             },
             {
-                Toast.makeText(context,"Error", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context,"Error", Toast.LENGTH_LONG).show()
+                Log.d(TAG, "Error")
             }
         ){
         }
