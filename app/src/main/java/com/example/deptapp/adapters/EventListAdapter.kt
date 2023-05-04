@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.deptapp.R
-import com.example.deptapp.data.BookData
 import com.example.deptapp.data.EventData
-import com.example.deptapp.data.TeacherData
 
 class EventListAdapter(
     private val listener: EventItemClicked
