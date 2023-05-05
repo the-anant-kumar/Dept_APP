@@ -1,20 +1,16 @@
 package com.example.deptapp.fragments
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.deptapp.R
-import com.example.deptapp.adapters.EventListAdapter
 import com.example.deptapp.data.EventData
 import com.example.deptapp.data.MySingleton
 import com.example.deptapp.databinding.FragmentSocietyBinding
@@ -124,9 +120,9 @@ class SocietyFragment : Fragment() {
 
     private fun setupEventSociety() {
 
-        val noticeCount = mEventArray.size
+        val eventCount = mEventArray.size
 
-        if (noticeCount >= 1) {
+        if (eventCount >= 1) {
             binding.llEvent1.visibility = View.VISIBLE
             val eventTitle = mEventArray[0].eventTitle
             val eventTime = mEventArray[0].eventTime
@@ -144,14 +140,18 @@ class SocietyFragment : Fragment() {
                     "img1",
                     mEventArray[0].eventImageUrl.getJSONObject(0)["imageurl"].toString()
                 )
-                bundle.putString(
-                    "img2",
-                    mEventArray[0].eventImageUrl.getJSONObject(1)["imageurl"].toString()
-                )
-                bundle.putString(
-                    "img3",
-                    mEventArray[0].eventImageUrl.getJSONObject(2)["imageurl"].toString()
-                )
+                if(mEventArray[0].eventImageUrl.length() >= 2) {
+                    bundle.putString(
+                        "img2",
+                        mEventArray[0].eventImageUrl.getJSONObject(1)["imageurl"].toString()
+                    )
+                }
+                if(mEventArray[0].eventImageUrl.length() >= 3) {
+                    bundle.putString(
+                        "img3",
+                        mEventArray[0].eventImageUrl.getJSONObject(2)["imageurl"].toString()
+                    )
+                }
                 bundle.putString("desc", mEventArray[0].eventDesc)
                 fragment.arguments = bundle
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -159,7 +159,7 @@ class SocietyFragment : Fragment() {
                 transaction.commit()
             }
         }
-        if (noticeCount >= 2) {
+        if (eventCount >= 2) {
             binding.llEvent2.visibility = View.VISIBLE
             val eventTitle = mEventArray[1].eventTitle
             val eventTime = mEventArray[1].eventTime.subSequence(0,10)
@@ -177,14 +177,18 @@ class SocietyFragment : Fragment() {
                     "img1",
                     mEventArray[1].eventImageUrl.getJSONObject(0)["imageurl"].toString()
                 )
-                bundle.putString(
-                    "img2",
-                    mEventArray[1].eventImageUrl.getJSONObject(1)["imageurl"].toString()
-                )
-                bundle.putString(
-                    "img3",
-                    mEventArray[1].eventImageUrl.getJSONObject(2)["imageurl"].toString()
-                )
+                if(mEventArray[1].eventImageUrl.length() >= 2) {
+                    bundle.putString(
+                        "img2",
+                        mEventArray[1].eventImageUrl.getJSONObject(1)["imageurl"].toString()
+                    )
+                }
+                if(mEventArray[1].eventImageUrl.length() >= 3) {
+                    bundle.putString(
+                        "img3",
+                        mEventArray[1].eventImageUrl.getJSONObject(2)["imageurl"].toString()
+                    )
+                }
                 bundle.putString("desc", mEventArray[1].eventDesc)
                 fragment.arguments = bundle
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -193,7 +197,7 @@ class SocietyFragment : Fragment() {
             }
 
         }
-        if(noticeCount >= 3) {
+        if(eventCount >= 3) {
             binding.llEvent3.visibility = View.VISIBLE
             val eventTitle = mEventArray[2].eventTitle
             val eventTime = mEventArray[2].eventTime.subSequence(0,10)
@@ -211,14 +215,18 @@ class SocietyFragment : Fragment() {
                     "img1",
                     mEventArray[2].eventImageUrl.getJSONObject(0)["imageurl"].toString()
                 )
-                bundle.putString(
-                    "img2",
-                    mEventArray[2].eventImageUrl.getJSONObject(1)["imageurl"].toString()
-                )
-                bundle.putString(
-                    "img3",
-                    mEventArray[2].eventImageUrl.getJSONObject(2)["imageurl"].toString()
-                )
+                if(mEventArray[2].eventImageUrl.length() >= 2) {
+                    bundle.putString(
+                        "img2",
+                        mEventArray[2].eventImageUrl.getJSONObject(1)["imageurl"].toString()
+                    )
+                }
+                if(mEventArray[2].eventImageUrl.length() >= 3) {
+                    bundle.putString(
+                        "img3",
+                        mEventArray[2].eventImageUrl.getJSONObject(2)["imageurl"].toString()
+                    )
+                }
                 bundle.putString("desc", mEventArray[2].eventDesc)
                 fragment.arguments = bundle
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -227,5 +235,4 @@ class SocietyFragment : Fragment() {
             }
         }
     }
-
 }
