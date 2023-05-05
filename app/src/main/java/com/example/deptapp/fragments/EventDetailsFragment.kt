@@ -28,6 +28,12 @@ class EventDetailsFragment : Fragment() {
         val desc3 = desc.subSequence(2*descSize/3, descSize)
 
         binding.tvEventDetailsFragTitle.text = arguments?.getString("title")
+        if(arguments?.getString("img2") != null) {
+            binding.ivImg2EventDetails.visibility = View.VISIBLE
+        }
+        if(arguments?.getString("img3") != null) {
+            binding.ivImg3EventDetails.visibility = View.VISIBLE
+        }
         Glide.with(binding.root.context)
             .load(arguments?.getString("img1"))
             .into(binding.ivImg1EventDetails)

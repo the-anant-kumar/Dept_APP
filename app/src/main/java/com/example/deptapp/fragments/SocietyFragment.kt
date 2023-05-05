@@ -106,7 +106,7 @@ class SocietyFragment : Fragment() {
                         eventsJsonObject.getString("_id"),
                         eventsJsonObject.getString("title"),
                         eventsJsonObject.getJSONArray("image"),
-                        eventsJsonObject.getString("title"),
+                        eventsJsonObject.getString("date"),
                         eventsJsonObject.getString("desc")
                     )
                     mEventArray.add(events)
@@ -135,7 +135,7 @@ class SocietyFragment : Fragment() {
                 .load(mEventArray[0].eventImageUrl.getJSONObject(0)["imageurl"])
                 .into(binding.imgSocEvent1)
             binding.tvSocEventTitle1.text = eventTitle
-            binding.tvSocEventTime1.text = eventTime
+            binding.tvSocEventTime1.text = eventTime.subSequence(0,10)
             binding.llEvent1.setOnClickListener {
                 val fragment = EventDetailsFragment()
                 val bundle = Bundle()
@@ -162,7 +162,7 @@ class SocietyFragment : Fragment() {
         if (noticeCount >= 2) {
             binding.llEvent2.visibility = View.VISIBLE
             val eventTitle = mEventArray[1].eventTitle
-            val eventTime = mEventArray[1].eventTime
+            val eventTime = mEventArray[1].eventTime.subSequence(0,10)
 
             Glide.with(binding.root.context)
                 .load(mEventArray[1].eventImageUrl.getJSONObject(0)["imageurl"])
@@ -196,7 +196,7 @@ class SocietyFragment : Fragment() {
         if(noticeCount >= 3) {
             binding.llEvent3.visibility = View.VISIBLE
             val eventTitle = mEventArray[2].eventTitle
-            val eventTime = mEventArray[2].eventTime
+            val eventTime = mEventArray[2].eventTime.subSequence(0,10)
 
             Glide.with(binding.root.context)
                 .load(mEventArray[2].eventImageUrl.getJSONObject(0)["imageurl"])
