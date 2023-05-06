@@ -55,6 +55,7 @@
                 android:layout_marginTop="5dp"
                 android:padding="10dp"
                 android:fontFamily="serif"
+                android:justificationMode="inter_word"
                 android:gravity="fill_vertical|fill_horizontal"
                 android:text="@string/ACMDescription"
                 android:textColor="@color/black"

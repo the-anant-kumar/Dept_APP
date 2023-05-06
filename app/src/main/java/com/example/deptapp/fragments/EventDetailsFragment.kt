@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
 import com.example.deptapp.R
 import com.example.deptapp.data.EventData
@@ -13,6 +14,7 @@ import com.example.deptapp.databinding.FragmentEventDetailsBinding
 class EventDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventDetailsBinding
+    private var onBackPressedToken: String? = "HOME"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,9 @@ class EventDetailsFragment : Fragment() {
         val desc1 = desc.subSequence(0, descSize/3)
         val desc2 = desc.subSequence(descSize/3, 2*descSize/3)
         val desc3 = desc.subSequence(2*descSize/3, descSize)
+
+        onBackPressedToken = arguments?.getString("onBackPressedToken")
+
 
         binding.tvEventDetailsFragTitle.text = arguments?.getString("title")
         if(arguments?.getString("img2") != null) {
@@ -50,5 +55,19 @@ class EventDetailsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        onBackPressed()
+    }
 
+    private fun onBackPressed() {
+        if(onBackPressedToken == "SOCIETY") {
+            val fragment = SocietyFragment()
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.frame, fragment)
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+    }
 }

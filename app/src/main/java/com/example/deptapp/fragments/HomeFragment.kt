@@ -127,6 +127,24 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             requireActivity().findViewById<NavigationView>(R.id.navigationView).checkedItem?.isChecked =
                 false
         }
+
+        binding.textFace.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://www.facebook.com/people/Hitofficial/100076318810987/"))
+        }
+
+        binding.textYoutube.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://www.youtube.com/channel/UChV167CyTOc0ovvu5AO2X3g"))
+        }
+
+        binding.textIntsa.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://www.instagram.com/hitofficial1/"))
+        }
     }
 
     private fun setSwipeImage() {

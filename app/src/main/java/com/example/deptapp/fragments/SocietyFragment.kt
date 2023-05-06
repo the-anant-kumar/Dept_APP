@@ -153,6 +153,7 @@ class SocietyFragment : Fragment() {
                     )
                 }
                 bundle.putString("desc", mEventArray[0].eventDesc)
+                bundle.putString("onBackPressedToken", "SOCIETY")
                 fragment.arguments = bundle
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.frame, fragment)
@@ -190,6 +191,7 @@ class SocietyFragment : Fragment() {
                     )
                 }
                 bundle.putString("desc", mEventArray[1].eventDesc)
+                bundle.putString("onBackPressedToken", "SOCIETY")
                 fragment.arguments = bundle
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.frame, fragment)
@@ -228,6 +230,7 @@ class SocietyFragment : Fragment() {
                     )
                 }
                 bundle.putString("desc", mEventArray[2].eventDesc)
+                bundle.putString("onBackPressedToken", "SOCIETY")
                 fragment.arguments = bundle
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.frame, fragment)
