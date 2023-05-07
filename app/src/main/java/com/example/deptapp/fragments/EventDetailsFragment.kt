@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.deptapp.R
 import com.example.deptapp.data.EventData
 import com.example.deptapp.databinding.FragmentEventDetailsBinding
+import com.google.android.material.navigation.NavigationView
 
 class EventDetailsFragment : Fragment() {
 
@@ -67,6 +68,7 @@ class EventDetailsFragment : Fragment() {
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.frame, fragment)
             fragmentTransaction?.addToBackStack(null)
+            activity?.findViewById<NavigationView>(R.id.navigationView)?.setCheckedItem(R.id.society)
             fragmentTransaction?.commit()
         }
     }

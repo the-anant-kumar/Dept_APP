@@ -1,5 +1,6 @@
 package com.example.deptapp.fragments
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -42,6 +43,29 @@ class AboutFragment : Fragment() {
             customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://www.instagram.com/hitofficial1/"))
         }
 
+        binding.cardViewDev1.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://www.linkedin.com/in/chandan5224/")
+            startActivity(intent)
+        }
+
+        binding.cardViewDev2.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://www.linkedin.com/in/theanantkumar/")
+            startActivity(intent)
+        }
+
+        binding.cardViewDev3.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://www.linkedin.com/in/navin-kumar-sah/")
+            startActivity(intent)
+        }
+
+        binding.cardViewDev4.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://www.linkedin.com/in/biswajit035/")
+            startActivity(intent)
+        }
         return binding.root
     }
 }

@@ -236,12 +236,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView7">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:id="@+id/cardViewDev1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardCornerRadius="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                    app:layout_constraintEnd_toStartOf="@+id/cardViewDev2"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -257,12 +259,14 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:id="@+id/cardViewDev2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardCornerRadius="25dp"
-                    app:layout_constraintEnd_toStartOf="@+id/cardView3"
-                    app:layout_constraintStart_toEndOf="@+id/cardView"
+                    app:layout_constraintEnd_toStartOf="@+id/cardViewDev3"
+                    app:layout_constraintStart_toEndOf="@+id/cardViewDev1"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
@@ -275,12 +279,14 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView3"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:id="@+id/cardViewDev3"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardCornerRadius="25dp"
-                    app:layout_constraintEnd_toStartOf="@+id/cardView4"
-                    app:layout_constraintStart_toEndOf="@+id/cardView2"
+                    app:layout_constraintEnd_toStartOf="@+id/cardViewDev4"
+                    app:layout_constraintStart_toEndOf="@+id/cardViewDev2"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
@@ -293,12 +299,14 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView4"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:id="@+id/cardViewDev4"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardCornerRadius="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/cardView3"
+                    app:layout_constraintStart_toEndOf="@+id/cardViewDev3"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
@@ -318,9 +326,9 @@
                     android:textColor="@color/black"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/cardView"
-                    app:layout_constraintStart_toStartOf="@+id/cardView"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                    app:layout_constraintEnd_toEndOf="@+id/cardViewDev1"
+                    app:layout_constraintStart_toStartOf="@+id/cardViewDev1"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewDev1" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -331,9 +339,9 @@
                     android:textColor="@color/black"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/cardView4"
-                    app:layout_constraintStart_toStartOf="@+id/cardView4"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+                    app:layout_constraintEnd_toEndOf="@+id/cardViewDev4"
+                    app:layout_constraintStart_toStartOf="@+id/cardViewDev4"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewDev4" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -344,9 +352,9 @@
                     android:textColor="@color/black"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/cardView2"
-                    app:layout_constraintStart_toStartOf="@+id/cardView2"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                    app:layout_constraintEnd_toEndOf="@+id/cardViewDev2"
+                    app:layout_constraintStart_toStartOf="@+id/cardViewDev2"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewDev2" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -358,9 +366,9 @@
                     android:textColor="@color/black"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/cardView3"
-                    app:layout_constraintStart_toStartOf="@+id/cardView3"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+                    app:layout_constraintEnd_toEndOf="@+id/cardViewDev3"
+                    app:layout_constraintStart_toStartOf="@+id/cardViewDev3"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewDev3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
