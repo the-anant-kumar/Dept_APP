@@ -2,6 +2,7 @@ package com.example.deptapp.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,7 @@ class LibraryFragment : Fragment() {
     private lateinit var mBooksListAdapter: BooksListAdapter
     private var booksList = ArrayList<BookData>()
     private var filterBooks = ArrayList<BookData>()
+    val TAG = "LIBRARY FRAGMENT"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,7 +103,8 @@ class LibraryFragment : Fragment() {
                 mBooksListAdapter.differ.submitList(booksArray)
             },
             Response.ErrorListener {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                Log.d(TAG, "Error")
             }
         ) {
         }

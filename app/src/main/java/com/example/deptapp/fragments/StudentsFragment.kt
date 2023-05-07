@@ -23,6 +23,7 @@ class StudentsFragment : Fragment() {
 
     private lateinit var binding: FragmentStudentsBinding
     val mStudentsArray = ArrayList<StudentData>()
+    val TAG = "STUDENT FRAGMENT"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,13 +55,15 @@ class StudentsFragment : Fragment() {
                     )
                     mStudentsArray.add(students)
                 }
-                if (mStudentsArray.isEmpty())
-                    Toast.makeText(context, "Data not found!", Toast.LENGTH_SHORT).show()
-                else
+                if (mStudentsArray.isEmpty()) {
+//                    Toast.makeText(context, "Data not found!", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "Data not found")
+                }else
                     studentDataSet()
             },
             {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                Log.d(TAG, it.message.toString())
             }
         ) {
         }

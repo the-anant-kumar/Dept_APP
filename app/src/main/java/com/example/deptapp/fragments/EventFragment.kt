@@ -2,6 +2,7 @@ package com.example.deptapp.fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class EventFragment : Fragment(), NoticeItemClicked, EventItemClicked {
     lateinit var binding: FragmentEventBinding
     lateinit var noticeListAdapter: NoticeListAdapter
     lateinit var mEventListAdapter: EventListAdapter
+    val TAG = "EVENT FRAGMENT"
 
 
     override fun onCreateView(
@@ -90,14 +92,13 @@ class EventFragment : Fragment(), NoticeItemClicked, EventItemClicked {
                 )
                 mNoticeArray.add(notice)
             }
-            if (mNoticeArray.isEmpty()) Toast.makeText(
-                binding.root.context,
-                "No data found!",
-                Toast.LENGTH_SHORT
-            ).show()
-            else noticeListAdapter.differ.submitList(mNoticeArray)
+            if (mNoticeArray.isEmpty()) {
+//                Toast.makeText(binding.root.context, "No data found!", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "No data found")
+            }else noticeListAdapter.differ.submitList(mNoticeArray)
         }, {
-            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+            Log.d(TAG, it.message.toString())
         }) {}
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
@@ -119,12 +120,14 @@ class EventFragment : Fragment(), NoticeItemClicked, EventItemClicked {
                 )
                 mEventArray.add(events)
             }
-            if (mEventArray.isEmpty())
-                Toast.makeText(binding.root.context, "No data found!", Toast.LENGTH_SHORT).show()
-            else
+            if (mEventArray.isEmpty()) {
+//                Toast.makeText(binding.root.context, "No data found!", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "No data found")
+            }else
                 mEventListAdapter.differ.submitList(mEventArray)
         }, {
-            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+            Log.d(TAG, it.message.toString())
         }) {}
         MySingleton.getInstance(binding.root.context).addToRequestQueue(jsonObjectRequest)
     }
@@ -140,9 +143,12 @@ class EventFragment : Fragment(), NoticeItemClicked, EventItemClicked {
         val fragment = EventDetailsFragment()
         val bundle = Bundle()
         bundle.putString("title", item.eventTitle)
-        bundle.putString("img1", item.eventImageUrl.getJSONObject(0)["imageurl"].toString())
-        bundle.putString("img2", item.eventImageUrl.getJSONObject(1)["imageurl"].toString())
-        bundle.putString("img3", item.eventImageUrl.getJSONObject(2)["imageurl"].toString())
+        if(item.eventImageUrl.length() >= 1)
+            bundle.putString("img1", item.eventImageUrl.getJSONObject(0)["imageurl"].toString())
+        if(item.eventImageUrl.length() >= 2)
+            bundle.putString("img2", item.eventImageUrl.getJSONObject(1)["imageurl"].toString())
+        if(item.eventImageUrl.length() >= 3)
+            bundle.putString("img3", item.eventImageUrl.getJSONObject(2)["imageurl"].toString())
         bundle.putString("desc", item.eventDesc)
         fragment.arguments = bundle
         val transaction = requireActivity().supportFragmentManager.beginTransaction()

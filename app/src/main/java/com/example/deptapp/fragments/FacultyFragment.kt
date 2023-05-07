@@ -30,6 +30,7 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
     private lateinit var binding: FragmentFacultyBinding
     private lateinit var mTeachersListAdapter: TeachersListAdapter
     lateinit var dialogPlus: DialogPlus
+    val TAG = "FACULTY FRAGMENT"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,13 +72,16 @@ class FacultyFragment : Fragment(), TeacherItemClicked {
                     )
                     mTeachersArray.add(teachers)
                 }
-                if (mTeachersArray.isEmpty())
-                    Toast.makeText(context, "Data not found!", Toast.LENGTH_SHORT).show()
-                else
+                if (mTeachersArray.isEmpty()) {
+//                    Toast.makeText(context, "Data not found!", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "Data not found")
+
+                }else
                     mTeachersListAdapter.differ.submitList(mTeachersArray)
             },
             {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                Log.d(TAG, it.message.toString())
             }
         ) {
         }

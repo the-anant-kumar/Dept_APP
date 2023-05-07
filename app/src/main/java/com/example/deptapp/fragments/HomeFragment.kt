@@ -34,6 +34,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
     lateinit var imageList: ArrayList<SlideModel>
     lateinit var mEventListAdapter: EventList2Adapter
     val mNoticeArray = ArrayList<NoticeData>()
+    val TAG = "HOME FRAGMENT"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -126,6 +127,24 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             requireActivity().findViewById<NavigationView>(R.id.navigationView).checkedItem?.isChecked =
                 false
         }
+
+        binding.textFace.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://www.facebook.com/people/Hitofficial/100076318810987/"))
+        }
+
+        binding.textYoutube.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://www.youtube.com/channel/UChV167CyTOc0ovvu5AO2X3g"))
+        }
+
+        binding.textIntsa.setOnClickListener {
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(binding.root.context, Uri.parse("https://www.instagram.com/hitofficial1/"))
+        }
     }
 
     private fun setSwipeImage() {
@@ -192,8 +211,8 @@ class HomeFragment : Fragment(), EventItem2Clicked {
                 setUpEvent()
             },
             {
-                Log.d("HOMEFRAGMENT", it.message.toString())
-                Toast.makeText(context, "Error Event", Toast.LENGTH_LONG).show()
+                Log.d(TAG, it.message.toString())
+//                Toast.makeText(context, "Error Event", Toast.LENGTH_LONG).show()
             }
         ) {
         }
@@ -231,7 +250,7 @@ class HomeFragment : Fragment(), EventItem2Clicked {
             },
             {
                 Log.d("HOMEFRAGMENT", it.message.toString())
-                Toast.makeText(context, "Error Notice", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Error Notice", Toast.LENGTH_LONG).show()
             }
         ) {
         }
@@ -241,9 +260,10 @@ class HomeFragment : Fragment(), EventItem2Clicked {
     private fun setupNoticeHome() {
 
         val noticeCount = mNoticeArray.size
-        if (noticeCount == 0)
-            Toast.makeText(binding.root.context, "Data not found!", Toast.LENGTH_SHORT).show()
-
+        if (noticeCount == 0) {
+//            Toast.makeText(binding.root.context, "Data not found!", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "Data not found")
+        }
         if (noticeCount >= 1) {
             binding.clNotice1.visibility = View.VISIBLE
             binding.noticeTitle1.text = mNoticeArray[0].noticeTitle
@@ -305,9 +325,12 @@ class HomeFragment : Fragment(), EventItem2Clicked {
         val fragment = EventDetailsFragment()
         val bundle = Bundle()
         bundle.putString("title", item.eventTitle)
-        bundle.putString("img1", item.eventImageUrl.getJSONObject(0)["imageurl"].toString())
-        bundle.putString("img2", item.eventImageUrl.getJSONObject(1)["imageurl"].toString())
-        bundle.putString("img3", item.eventImageUrl.getJSONObject(2)["imageurl"].toString())
+        if(item.eventImageUrl.length() >= 1)
+            bundle.putString("img1", item.eventImageUrl.getJSONObject(0)["imageurl"].toString())
+        if(item.eventImageUrl.length() >= 2)
+            bundle.putString("img2", item.eventImageUrl.getJSONObject(1)["imageurl"].toString())
+        if(item.eventImageUrl.length() >= 3)
+            bundle.putString("img3", item.eventImageUrl.getJSONObject(2)["imageurl"].toString())
         bundle.putString("desc", item.eventDesc)
         fragment.arguments = bundle
         val transaction = requireActivity().supportFragmentManager.beginTransaction()

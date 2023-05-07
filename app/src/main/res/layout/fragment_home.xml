@@ -20,7 +20,7 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:text="Welcome to Department of Information Technology !!"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/marquee_color"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -65,6 +65,8 @@
                     android:padding="5dp">
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/btnWebsite"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
@@ -84,6 +86,8 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/btnFaculty"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
@@ -103,6 +107,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/btnAcademics"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
@@ -173,6 +179,8 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:foreground="?attr/selectableItemBackground"
+                            android:clickable="true"
                             android:id="@+id/tvBtnEventViewMore"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -180,7 +188,7 @@
                             android:fontFamily="serif"
                             android:gravity="center"
                             android:text="SHOW MORE"
-                            android:textColor="@color/purple_500"
+                            android:textColor="#2b24b3"
                             android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -236,6 +244,8 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:foreground="?attr/selectableItemBackground"
+                            android:clickable="true"
                             android:id="@+id/tvBtnNoticeViewMore"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -243,7 +253,7 @@
                             android:fontFamily="serif"
                             android:gravity="center"
                             android:text="SHOW MORE"
-                            android:textColor="@color/purple_500"
+                            android:textColor="#2b24b3"
                             android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -597,14 +607,15 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:background="@color/purple_500">
+                    android:background="@color/footer_color">
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="5dp"
+                        android:textSize="18sp"
                         android:gravity="center_vertical"
                         android:text="Connect with us"
                         android:textColor="@color/white"
@@ -641,18 +652,20 @@
                         android:id="@+id/facebook"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginEnd="80dp"
                         android:src="@drawable/facebook"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/twitter"
+                        android:id="@+id/youtube"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginEnd="80dp"
-                        android:src="@drawable/twitter"
+                        android:src="@drawable/youtube"
                         app:layout_constraintBottom_toTopOf="@+id/insta"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/facebook" />
@@ -661,18 +674,19 @@
                         android:id="@+id/insta"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginEnd="80dp"
                         android:src="@drawable/instagram"
                         app:layout_constraintBottom_toTopOf="@+id/linkedin"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/twitter" />
+                        app:layout_constraintTop_toBottomOf="@+id/youtube" />
 
                     <ImageView
                         android:id="@+id/linkedin"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="80dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_marginBottom="20dp"
                         android:src="@drawable/linkedin"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -681,41 +695,44 @@
                         android:id="@+id/text_face"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="20dp"
                         android:text="Facebook"
                         android:textColor="@color/yellow"
                         app:layout_constraintStart_toEndOf="@+id/facebook"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text_twitt"
+                        android:id="@+id/text_youtube"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:text="Twitter"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Youtube"
                         android:textColor="@color/yellow"
                         app:layout_constraintBottom_toTopOf="@+id/text_intsa"
-                        app:layout_constraintStart_toEndOf="@+id/twitter"
+                        app:layout_constraintStart_toEndOf="@+id/youtube"
                         app:layout_constraintTop_toBottomOf="@+id/text_face" />
 
                     <TextView
                         android:id="@+id/text_intsa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="10dp"
                         android:text="Instagram"
                         android:textColor="@color/yellow"
                         app:layout_constraintBottom_toTopOf="@+id/text_link"
                         app:layout_constraintStart_toEndOf="@+id/insta"
-                        app:layout_constraintTop_toBottomOf="@+id/text_twitt" />
+                        app:layout_constraintTop_toBottomOf="@+id/text_youtube" />
 
                     <TextView
                         android:id="@+id/text_link"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="20dp"
                         android:text="LinkedIn"
                         android:textColor="@color/yellow"
                         app:layout_constraintBottom_toBottomOf="parent"

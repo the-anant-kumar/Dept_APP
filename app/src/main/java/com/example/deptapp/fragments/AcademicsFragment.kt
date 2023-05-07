@@ -25,6 +25,7 @@ class AcademicsFragment : Fragment() {
     private lateinit var binding: FragmentAcademicsBinding
     val mRoutineArray = ArrayList<RoutineData>()
     val mSyllabusArray = ArrayList<SyllabusData>()
+    val TAG = "ACADEMICS FRAGMENT"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +65,8 @@ class AcademicsFragment : Fragment() {
 
             },
             {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                Log.d(TAG, it.message.toString())
             }
         ) {
         }
@@ -93,13 +95,16 @@ class AcademicsFragment : Fragment() {
                     mSyllabusArray.add(syllabus)
                 }
 
-                if(mSyllabusArray.isEmpty())
-                    Toast.makeText(binding.root.context,"Data not found!",Toast.LENGTH_SHORT).show()
-                else
+                if(mSyllabusArray.isEmpty()) {
+//                    Toast.makeText(binding.root.context, "Data not found!", Toast.LENGTH_SHORT)
+//                        .show()
+                    Log.d(TAG, "Data not found")
+                }else
                     setDataSyllabus()
             },
             {
-                Toast.makeText(binding.root.context,"Error",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(binding.root.context,"Error",Toast.LENGTH_SHORT).show()
+                Log.d(TAG, it.message.toString())
             }
         ) {
         }
