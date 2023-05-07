@@ -23,10 +23,6 @@ class AboutFragment : Fragment() {
         binding= FragmentAboutBinding.inflate(layoutInflater, container, false)
 
         Glide.with(binding.root.context).load("https://www.admissionfever.com/Media/clgimg/gallery/2092_img7281787176718769.png").into(binding.aboutImage)
-        Glide.with(binding.root.context).load("https://cdn.pixabay.com/photo/2022/06/15/13/39/man-7263965__340.png").into(binding.imgDev1)
-        Glide.with(binding.root.context).load("https://cdn.pixabay.com/photo/2022/06/15/13/39/man-7263965__340.png").into(binding.imgDev2)
-        Glide.with(binding.root.context).load("https://cdn.pixabay.com/photo/2022/06/15/13/39/man-7263965__340.png").into(binding.imgDev3)
-        Glide.with(binding.root.context).load("https://cdn.pixabay.com/photo/2022/06/15/13/39/man-7263965__340.png").into(binding.imgDev4)
 
         binding.textFace.setOnClickListener {
             val builder = CustomTabsIntent.Builder()

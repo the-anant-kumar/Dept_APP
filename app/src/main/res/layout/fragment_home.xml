@@ -20,7 +20,7 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:text="Welcome to Department of Information Technology !!"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/marquee_color"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -65,6 +65,8 @@
                     android:padding="5dp">
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/btnWebsite"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
@@ -84,6 +86,8 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/btnFaculty"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
@@ -103,6 +107,8 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/btnAcademics"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
@@ -173,6 +179,8 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:foreground="?attr/selectableItemBackground"
+                            android:clickable="true"
                             android:id="@+id/tvBtnEventViewMore"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -180,7 +188,7 @@
                             android:fontFamily="serif"
                             android:gravity="center"
                             android:text="SHOW MORE"
-                            android:textColor="@color/purple_500"
+                            android:textColor="#2b24b3"
                             android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -236,6 +244,8 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:foreground="?attr/selectableItemBackground"
+                            android:clickable="true"
                             android:id="@+id/tvBtnNoticeViewMore"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -243,7 +253,7 @@
                             android:fontFamily="serif"
                             android:gravity="center"
                             android:text="SHOW MORE"
-                            android:textColor="@color/purple_500"
+                            android:textColor="#2b24b3"
                             android:textSize="10sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -597,7 +607,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:background="@color/purple_500">
+                    android:background="@color/footer_color">
 
                     <TextView
                         android:id="@+id/textView2"
